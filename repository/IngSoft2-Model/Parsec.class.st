@@ -27,23 +27,23 @@ Parsec class >> distanceOf: aDistance [
 { #category : #actions }
 Parsec >> <= aDistance [
 
-	^ self amountInParsecs <= aDistance amountInParsecs
+	^ self distancetInParsecs <= aDistance distancetInParsecs
 ]
 
 { #category : #accessing }
-Parsec >> amount [
+Parsec >> distance [
 
 	^ distance
 ]
 
 { #category : #actions }
-Parsec >> amountInLightYears [
+Parsec >> distanceInLightYears [
 
 	^ distance * 3
 ]
 
 { #category : #actions }
-Parsec >> amountInParsecs [
+Parsec >> distancetInParsecs [
 
 	^ distance
 ]

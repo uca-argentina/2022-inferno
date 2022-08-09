@@ -12,7 +12,7 @@ Class {
 
 { #category : #assertions }
 Hyperjump class >> assertValid: aJumpsArray [ 
-	aJumpsArray do: [ :distance | (distance amount) >= 0 ifFalse: [ 
+	aJumpsArray do: [ :distance | (distance distance) >= 0 ifFalse: [ 
 			Error signal: 'Values of the collection cannot be a negative number' ] ].
 ]
 
@@ -44,7 +44,7 @@ Hyperjump >> getJumpNumberInSpots: aBoard [
 	lengthInParsecs := aBoard lengthInParsecs.
 	amountOfSpots := aBoard lengthInSpots.
 	parsecsPerSpot := lengthInParsecs / amountOfSpots.
-	amountOfParsecsToJump := parsecsForThisJump amountInParsecs.
+	amountOfParsecsToJump := parsecsForThisJump distancetInParsecs.
 	amountOfSpotsToJump := amountOfParsecsToJump // parsecsPerSpot.
 	^ amountOfSpotsToJump
 ]

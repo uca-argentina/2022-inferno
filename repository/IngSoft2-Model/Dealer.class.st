@@ -11,14 +11,11 @@ Class {
 { #category : #dealing }
 Dealer >> dealInitialCards [
 
-	| randomcard1 randomcard2 initialCards initialHand |
+	| randomcard1 randomcard2 |
 	randomcard1 := self dealOne.
 	randomcard2 := self dealOne.
-	initialCards := { 
-		                randomcard1.
-		                randomcard2 }.
-	initialHand := Hand containing: initialCards.
-	^ initialHand
+	^ Hand containing: {randomcard1. randomcard2}.
+
 ]
 
 { #category : #dealing }
