@@ -233,14 +233,14 @@ Board >> move: aSpaceship withoutTriggeringNewEffectsfrom: positionBeforeRoll to
 		ifFalse: [ 
 			(self isLapFinishedIf: spotBeforeRoll moves: rollNumber)
 				ifTrue: [ 
-					lapBeforeRoll + 1 >= laps
+					lapBeforeRoll + ((rollNumber+spotBeforeRoll )//length ) >= laps
 						ifTrue: [ self moveToFinishLine: aSpaceship ]
 						ifFalse: [ 
-							spotAfterLapping := spotBeforeRoll + rollNumber - length.
+							spotAfterLapping := spotBeforeRoll + rollNumber - (length*((rollNumber+spotBeforeRoll ) //length)).
 							spotAfterLapping == 0 ifTrue: [ spotAfterLapping := length ].
 							self
 								move: aSpaceship
-								to: lapBeforeRoll + 1
+								to: lapBeforeRoll + ((rollNumber+spotBeforeRoll  )//length)
 								and: spotAfterLapping ] ]
 				ifFalse: [ 
 					self
