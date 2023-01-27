@@ -167,7 +167,7 @@ Zathura >> cardApplicator [
 	cardsAffectingRoll addAllLast: cardsAffectingAllRolls.
 	addToRoll := 0.
 	cardsAffectingRoll do: [ :card | 
-		addToRoll := addToRoll + card effectOnRoll ].
+		addToRoll := addToRoll + card effectOnPlay ].
 	^ addToRoll
 ]
 
