@@ -89,12 +89,21 @@ Board >> applyEffect: aSpaceship [
 { #category : #effectApplying }
 Board >> applyEffectTriggeredBy: aSpaceship [
 
-	| spotNumber resultOfEffectApplying cardPicked |
+	| spotNumber resultOfEffectApplying cardPicked  |
 	spotNumber := (self positionOf: aSpaceship) spotNumber.
 	lastEffectAplied := (layout at: spotNumber) effectAtSpot.
 	resultOfEffectApplying := lastEffectAplied
 		                          applyTo: self
 		                          by: aSpaceship.
+	(resultOfEffectApplying isKindOf: Dictionary) ifTrue: [
+		resultOfEffectApplying keysDo: [:spaceship | 
+			((resultOfEffectApplying at: spaceship) >= 0) 
+				ifTrue: [self move: spaceship withoutTriggeringNewEffectsfrom: (self positionOf: aSpaceship) to: (resultOfEffectApplying at: aSpaceship )]
+				ifFalse: [ self move: spaceship back: (resultOfEffectApplying at: spaceship ) from: (self positionOf: spaceship)].
+	 		
+		].
+	].
+	
 	[ resultOfEffectApplying assertThatIsACard ]
 		on: Exception
 		do: [ ^ self ].
@@ -109,6 +118,15 @@ Board >> applyLastEffectTo: aSpaceship [
 	resultOfEffectApplying := lastEffectAplied
 		                          applyTo: self
 		                          by: aSpaceship.
+		(resultOfEffectApplying isKindOf: Dictionary) ifTrue: [
+		resultOfEffectApplying keysDo: [:spaceship | 
+			((resultOfEffectApplying at: spaceship) >= 0) 
+				ifTrue: [self move: spaceship withoutTriggeringNewEffectsfrom: (self positionOf: aSpaceship) to: (resultOfEffectApplying at: aSpaceship )]
+				ifFalse: [ self move: spaceship back: (resultOfEffectApplying at: spaceship ) from: (self positionOf: spaceship)].
+	 		
+		].
+	].
+		
 	[ resultOfEffectApplying assertThatIsACard ]
 		on: Exception
 		do: [ ^ self ].

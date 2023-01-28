@@ -25,13 +25,12 @@ Hyperjump class >> createWith: aJumpsArray [
 { #category : #applying }
 Hyperjump >> applyTo: aBoard by: aSpaceship [
 
-	| positionBeforeJump jumpNumber |
+	| positionBeforeJump jumpNumber positionsAfterEffect |
 	positionBeforeJump := aBoard positionOf: aSpaceship.
 	jumpNumber := self getJumpNumberInSpots: aBoard.
-	aBoard
-		move: aSpaceship
-		withoutTriggeringNewEffectsfrom: positionBeforeJump
-		to: jumpNumber
+	positionsAfterEffect := Dictionary new: 1.
+	positionsAfterEffect at: aSpaceship put: jumpNumber.
+	^positionsAfterEffect .
 ]
 
 { #category : #getters }
