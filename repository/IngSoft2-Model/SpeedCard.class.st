@@ -26,7 +26,7 @@ SpeedCard >> checkIfItIsAValidCard [
 ]
 
 { #category : #playing }
-SpeedCard >> effectOnRoll [
+SpeedCard >> effectOnPlay [
 
 	^ 1
 ]

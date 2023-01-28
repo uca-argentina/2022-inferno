@@ -26,7 +26,7 @@ OverloadCard >> checkIfItIsAValidCard [
 ]
 
 { #category : #effect }
-OverloadCard >> effectOnRoll [
+OverloadCard >> effectOnPlay [
 
 	^ -2
 ]
