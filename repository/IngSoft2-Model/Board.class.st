@@ -142,7 +142,7 @@ Board >> dealer [
 { #category : #initialization }
 Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmountOfLaps playedBy: aCollectionOfSpaceships [
 
-	| amountOfSpaceships |
+	| amountOfSpaceships typesOfCards|
 	layout := aCollectionOfSpots.
 	lengthInParsecs := aLengthInParsecs.
 	laps := anAmountOfLaps.
@@ -150,7 +150,14 @@ Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmou
 	amountOfSpaceships := aCollectionOfSpaceships size.
 	lastEffectAplied := NoEffect new.
 	spaceshipsPositions := Dictionary new: amountOfSpaceships.
-	cardDealer := Dealer new.
+	typesOfCards  := { 
+		         SpeedCard new.
+		         OverloadCard new.
+		         RedoCard new.
+		         AccelerationCard new.
+		         CancellationCard new.
+		         RepeatCard new }. 
+	cardDealer := Dealer ofCards: typesOfCards  .
 	1 to: amountOfSpaceships do: [ :spaceship | 
 		spaceshipsPositions
 			at: (aCollectionOfSpaceships at: spaceship)

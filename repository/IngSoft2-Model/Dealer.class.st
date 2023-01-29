@@ -5,8 +5,17 @@ I represent a Dealer
 Class {
 	#name : #Dealer,
 	#superclass : #Object,
+	#instVars : [
+		'typesOfCards'
+	],
 	#category : #'IngSoft2-Model'
 }
+
+{ #category : #initializing }
+Dealer class >> ofCards: arrayOfTypesOfCards [
+
+ 	^self new initializeWith: arrayOfTypesOfCards 
+]
 
 { #category : #dealing }
 Dealer >> dealInitialCards [
@@ -21,14 +30,13 @@ Dealer >> dealInitialCards [
 { #category : #dealing }
 Dealer >> dealOne [
 
-	| array randomcard |
-	array := { 
-		         SpeedCard new.
-		         OverloadCard new.
-		         RedoCard new.
-		         AccelerationCard new.
-		         CancellationCard new.
-		         RepeatCard new }.
-	randomcard := array atRandom.
+	| randomcard | 
+	randomcard := typesOfCards atRandom.
 	^ randomcard
+]
+
+{ #category : #initialization }
+Dealer >> initializeWith: arrayOfTypes [ 
+
+	typesOfCards := arrayOfTypes 
 ]
