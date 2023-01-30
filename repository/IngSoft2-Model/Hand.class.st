@@ -27,16 +27,15 @@ Hand class >> containing: aCollectionOfCards [
 { #category : #playing }
 Hand >> addPickedCardToHand: aCard [
 
-	[aCard assertThatIsACard] on: Exception do: [ ^aCard ].
-
-	deck addLast: aCard.
-	^aCard
+	aCard assertThatIsACard
+		ifTrue: [ deck addLast: aCard ].
+	^ aCard
 ]
 
 { #category : #playing }
 Hand >> assertCardIsOnHand: cardToPlay [
 
-	cardToPlay ifNil: [ 
+	(cardToPlay assertThatIsACard)ifFalse: [ 
 		Error signal: 'Spaceship does not have a card of that type' ]
 ]
 
