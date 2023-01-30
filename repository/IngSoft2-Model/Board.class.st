@@ -107,7 +107,9 @@ Board >> applyEffectTriggeredBy: aSpaceship [
 					self
 						move: spaceship
 						back: (resultOfEffectApplying at: spaceship)
-						from: (self positionOf: spaceship) ] ] ].
+						from: (self positionOf: spaceship) ] ]. 
+				resultOfEffectApplying := NullCard new.
+				].
 	resultOfEffectApplying assertThatIsACard
 		              ifTrue: [ cardPicked := resultOfEffectApplying]
 		              ifFalse: [ cardPicked := NullCard new ].
@@ -128,6 +130,7 @@ Board >> applyLastEffectTo: aSpaceship [
 				ifFalse: [ self move: spaceship back: (resultOfEffectApplying at: spaceship ) from: (self positionOf: spaceship)].
 	 		
 		].
+	resultOfEffectApplying := NullCard new.
 	].
 		
 	(resultOfEffectApplying assertThatIsACard)
