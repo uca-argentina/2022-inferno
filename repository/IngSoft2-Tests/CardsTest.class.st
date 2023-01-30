@@ -26,7 +26,7 @@ CardsTest >> test03SpeedCardEffectOnRollIsPlusOne [
 
 	| aTestCard |
 	aTestCard := SpeedCard new.
-	self assert: aTestCard effectOnPlay equals: 1.
+	self assert: aTestCard effectOnRoll equals: 1.
 ]
 
 { #category : #tests }
@@ -51,7 +51,7 @@ CardsTest >> test06OverloadEffectOnRollIsMinusTwo [
 
 	| aTestCard |
 	aTestCard := OverloadCard  new.
-	self assert: aTestCard effectOnPlay equals: -2.
+	self assert: aTestCard effectOnRoll equals: -2.
 ]
 
 { #category : #tests }
@@ -93,7 +93,7 @@ CardsTest >> test11AccelerationCardEffectOnRollIsPlusOne [
 
 	| aTestCard |
 	aTestCard := AccelerationCard new.
-	self assert: aTestCard effectOnPlay equals: 1.
+	self assert: aTestCard effectOnRoll equals: 1.
 ]
 
 { #category : #tests }

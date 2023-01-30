@@ -10,8 +10,3 @@ Class {
 { #category : #applying }
 NoEffect >> applyTo: aBoard by: aSpaceship [
 ]
-
-{ #category : #assertions }
-NoEffect >> assertThatIsACard [
-	^ false.
-]

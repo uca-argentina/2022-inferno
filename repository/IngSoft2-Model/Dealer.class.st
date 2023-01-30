@@ -5,38 +5,33 @@ I represent a Dealer
 Class {
 	#name : #Dealer,
 	#superclass : #Object,
-	#instVars : [
-		'typesOfCards'
-	],
 	#category : #'IngSoft2-Model'
 }
-
-{ #category : #initializing }
-Dealer class >> ofCards: arrayOfTypesOfCards [
-
- 	^self new initializeWith: arrayOfTypesOfCards 
-]
 
 { #category : #dealing }
 Dealer >> dealInitialCards [
 
-	| randomcard1 randomcard2 |
+	| randomcard1 randomcard2 initialCards initialHand |
 	randomcard1 := self dealOne.
 	randomcard2 := self dealOne.
-	^ Hand containing: {randomcard1. randomcard2}.
-
+	initialCards := { 
+		                randomcard1.
+		                randomcard2 }.
+	initialHand := Hand containing: initialCards.
+	^ initialHand
 ]
 
 { #category : #dealing }
 Dealer >> dealOne [
 
-	| randomcard | 
-	randomcard := typesOfCards atRandom.
+	| array randomcard |
+	array := { 
+		         SpeedCard new.
+		         OverloadCard new.
+		         RedoCard new.
+		         AccelerationCard new.
+		         CancellationCard new.
+		         RepeatCard new }.
+	randomcard := array atRandom.
 	^ randomcard
-]
-
-{ #category : #initialization }
-Dealer >> initializeWith: arrayOfTypes [ 
-
-	typesOfCards := arrayOfTypes 
 ]

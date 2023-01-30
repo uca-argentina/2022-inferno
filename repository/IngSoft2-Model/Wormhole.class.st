@@ -10,9 +10,8 @@ Class {
 { #category : #applying }
 Wormhole >> applyTo: aBoard by: aSpaceship [
 
-	| positionsAfterEffect  wormholeNumber |
+	| positionBeforeWormhole  wormholeNumber |
 	wormholeNumber := -4.
-	positionsAfterEffect := Dictionary new: 1.
-	positionsAfterEffect at: aSpaceship put: wormholeNumber.
-	^positionsAfterEffect .
+	positionBeforeWormhole := aBoard positionOf: aSpaceship.
+	aBoard move: aSpaceship back: wormholeNumber from: positionBeforeWormhole.
 ]

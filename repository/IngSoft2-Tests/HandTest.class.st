@@ -40,7 +40,7 @@ HandTest >> test03CardIsRemovedFromHandWhenPlayed [
 			         exampleCardOne.
 			         exampleCardTwo }.
 	cardToPlay := SpeedCard new.
-	aHand play: cardToPlay.
+	aHand playCardOfType: cardToPlay.
 	self assert: aHand cardsOnHand equals: 1
 ]
 
@@ -59,7 +59,7 @@ HandTest >> test04AHandCanReturnACardThatIsPresentInThatDeck [
 			         exampleCardOne.
 			         exampleCardTwo }.
 	self
-		assert: (aHand play: typeOfCardToTake)
+		assert: (aHand playCardOfType: typeOfCardToTake)
 		equals: testCard
 ]
 

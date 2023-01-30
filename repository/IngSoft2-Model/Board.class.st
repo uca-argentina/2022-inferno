@@ -95,24 +95,10 @@ Board >> applyEffectTriggeredBy: aSpaceship [
 	resultOfEffectApplying := lastEffectAplied
 		                          applyTo: self
 		                          by: aSpaceship.
-	(resultOfEffectApplying isKindOf: Dictionary) ifTrue: [ 
-		resultOfEffectApplying keysDo: [ :spaceship | 
-			(resultOfEffectApplying at: spaceship) >= 0
-				ifTrue: [ 
-					self
-						move: spaceship
-						withoutTriggeringNewEffectsfrom: (self positionOf: aSpaceship)
-						to: (resultOfEffectApplying at: aSpaceship) ]
-				ifFalse: [ 
-					self
-						move: spaceship
-						back: (resultOfEffectApplying at: spaceship)
-						from: (self positionOf: spaceship) ] ]. 
-				resultOfEffectApplying := NullCard new.
-				].
-	resultOfEffectApplying assertThatIsACard
-		              ifTrue: [ cardPicked := resultOfEffectApplying]
-		              ifFalse: [ cardPicked := NullCard new ].
+	[ resultOfEffectApplying assertThatIsACard ]
+		on: Exception
+		do: [ ^ self ].
+	cardPicked := resultOfEffectApplying.
 	^ cardPicked
 ]
 
@@ -123,31 +109,11 @@ Board >> applyLastEffectTo: aSpaceship [
 	resultOfEffectApplying := lastEffectAplied
 		                          applyTo: self
 		                          by: aSpaceship.
-		(resultOfEffectApplying isKindOf: Dictionary) ifTrue: [
-		resultOfEffectApplying keysDo: [:spaceship | 
-			((resultOfEffectApplying at: spaceship) >= 0) 
-				ifTrue: [self move: spaceship withoutTriggeringNewEffectsfrom: (self positionOf: aSpaceship) to: (resultOfEffectApplying at: aSpaceship )]
-				ifFalse: [ self move: spaceship back: (resultOfEffectApplying at: spaceship ) from: (self positionOf: spaceship)].
-	 		
-		].
-	resultOfEffectApplying := NullCard new.
-	].
-		
-	(resultOfEffectApplying assertThatIsACard)
-		              ifTrue: [ cardPicked := resultOfEffectApplying]
-		              ifFalse: [ cardPicked := NullCard new ].
+	[ resultOfEffectApplying assertThatIsACard ]
+		on: Exception
+		do: [ ^ self ].
+	cardPicked := resultOfEffectApplying.
 	^ cardPicked
-	
-]
-
-{ #category : #asserting }
-Board >> assertThatIsACard [
-	^ false.
-]
-
-{ #category : #dealing }
-Board >> dealCard [
-	^ (self dealer dealOne )
 ]
 
 { #category : #getters }
@@ -158,7 +124,7 @@ Board >> dealer [
 { #category : #initialization }
 Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmountOfLaps playedBy: aCollectionOfSpaceships [
 
-	| amountOfSpaceships typesOfCards|
+	| amountOfSpaceships |
 	layout := aCollectionOfSpots.
 	lengthInParsecs := aLengthInParsecs.
 	laps := anAmountOfLaps.
@@ -166,14 +132,7 @@ Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmou
 	amountOfSpaceships := aCollectionOfSpaceships size.
 	lastEffectAplied := NoEffect new.
 	spaceshipsPositions := Dictionary new: amountOfSpaceships.
-	typesOfCards  := { 
-		         SpeedCard new.
-		         OverloadCard new.
-		         RedoCard new.
-		         AccelerationCard new.
-		         CancellationCard new.
-		         RepeatCard new }. 
-	cardDealer := Dealer ofCards: typesOfCards  .
+	cardDealer := Dealer new.
 	1 to: amountOfSpaceships do: [ :spaceship | 
 		spaceshipsPositions
 			at: (aCollectionOfSpaceships at: spaceship)
@@ -246,10 +205,7 @@ Board >> move: aSpaceship from: positionBeforeRoll to: rollNumber [
 					self
 						move: aSpaceship
 						to: lapBeforeRoll
-						and: spotBeforeRoll + rollNumber.
-						
-					cardPicked := NullCard.
-						]
+						and: spotBeforeRoll + rollNumber ]
 				ifTrue: [ 
 				self move: aSpaceship back: rollNumber from: spotBeforeRoll ].
 			cardPicked := self applyEffect: aSpaceship ].
@@ -277,14 +233,14 @@ Board >> move: aSpaceship withoutTriggeringNewEffectsfrom: positionBeforeRoll to
 		ifFalse: [ 
 			(self isLapFinishedIf: spotBeforeRoll moves: rollNumber)
 				ifTrue: [ 
-					lapBeforeRoll + ((rollNumber+spotBeforeRoll )//length ) >= laps
+					lapBeforeRoll + 1 >= laps
 						ifTrue: [ self moveToFinishLine: aSpaceship ]
 						ifFalse: [ 
-							spotAfterLapping := spotBeforeRoll + rollNumber - (length*((rollNumber+spotBeforeRoll ) //length)).
+							spotAfterLapping := spotBeforeRoll + rollNumber - length.
 							spotAfterLapping == 0 ifTrue: [ spotAfterLapping := length ].
 							self
 								move: aSpaceship
-								to: lapBeforeRoll + ((rollNumber+spotBeforeRoll  )//length)
+								to: lapBeforeRoll + 1
 								and: spotAfterLapping ] ]
 				ifFalse: [ 
 					self
