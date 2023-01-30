@@ -12,7 +12,7 @@ Class {
 
 { #category : #assertions }
 Hyperjump class >> assertValid: aJumpsArray [ 
-	aJumpsArray do: [ :distance | (distance distance) >= 0 ifFalse: [ 
+	aJumpsArray do: [ :distance | (distance amount) >= 0 ifFalse: [ 
 			Error signal: 'Values of the collection cannot be a negative number' ] ].
 ]
 
@@ -25,12 +25,13 @@ Hyperjump class >> createWith: aJumpsArray [
 { #category : #applying }
 Hyperjump >> applyTo: aBoard by: aSpaceship [
 
-	| positionBeforeJump jumpNumber positionsAfterEffect |
+	| positionBeforeJump jumpNumber |
 	positionBeforeJump := aBoard positionOf: aSpaceship.
 	jumpNumber := self getJumpNumberInSpots: aBoard.
-	positionsAfterEffect := Dictionary new: 1.
-	positionsAfterEffect at: aSpaceship put: jumpNumber.
-	^positionsAfterEffect .
+	aBoard
+		move: aSpaceship
+		withoutTriggeringNewEffectsfrom: positionBeforeJump
+		to: jumpNumber
 ]
 
 { #category : #getters }
@@ -43,7 +44,7 @@ Hyperjump >> getJumpNumberInSpots: aBoard [
 	lengthInParsecs := aBoard lengthInParsecs.
 	amountOfSpots := aBoard lengthInSpots.
 	parsecsPerSpot := lengthInParsecs / amountOfSpots.
-	amountOfParsecsToJump := parsecsForThisJump distancetInParsecs.
+	amountOfParsecsToJump := parsecsForThisJump amountInParsecs.
 	amountOfSpotsToJump := amountOfParsecsToJump // parsecsPerSpot.
 	^ amountOfSpotsToJump
 ]

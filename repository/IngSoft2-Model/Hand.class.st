@@ -13,8 +13,8 @@ Class {
 { #category : #'class initialization' }
 Hand class >> assertThatCollectionIsAllCards: aCollectionOfCards [
 
-	(aCollectionOfCards anySatisfy:[ :card | card assertThatIsACard not])
-	ifTrue: [ Error signal: 'Cant have a hand containing anything but a type of card.' ]. 
+	aCollectionOfCards do: [ :card | 
+		card assertThatIsACard ifFalse: [ Error signal: 'Cant have a hand containing anything but a type of card.' ] ].
 ]
 
 { #category : #'class initialization' }
@@ -27,15 +27,16 @@ Hand class >> containing: aCollectionOfCards [
 { #category : #playing }
 Hand >> addPickedCardToHand: aCard [
 
-	aCard assertThatIsACard
-		ifTrue: [ deck addLast: aCard ].
-	^ aCard
+	[aCard assertThatIsACard] on: Exception do: [ ^aCard ].
+
+	deck addLast: aCard.
+	^aCard
 ]
 
 { #category : #playing }
 Hand >> assertCardIsOnHand: cardToPlay [
 
-	(cardToPlay assertThatIsACard)ifFalse: [ 
+	cardToPlay ifNil: [ 
 		Error signal: 'Spaceship does not have a card of that type' ]
 ]
 
@@ -43,12 +44,6 @@ Hand >> assertCardIsOnHand: cardToPlay [
 Hand >> cardsOnHand [
 
 	^ deck size
-]
-
-{ #category : #getter }
-Hand >> deck [
-
-	^ deck
 ]
 
 { #category : #initialization }
@@ -60,7 +55,7 @@ Hand >> initializeContaining: aCollectionOfCards [
 ]
 
 { #category : #playing }
-Hand >> play: aCard [
+Hand >> playCardOfType: aCard [
 
 	| cardToPlay |
 	cardToPlay := nil.
@@ -70,4 +65,10 @@ Hand >> play: aCard [
 	deck remove: cardToPlay.
 	self assertCardIsOnHand: cardToPlay.
 	^ cardToPlay
+]
+
+{ #category : #getter }
+Hand >> showHand [
+
+	^ deck
 ]

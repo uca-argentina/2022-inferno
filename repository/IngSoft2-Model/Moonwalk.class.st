@@ -27,14 +27,15 @@ Moonwalk class >> createWith: aMoonwalkNumber [
 { #category : #applying }
 Moonwalk >> applyTo: aBoard by: aSpaceship [
 
-	| positionsAfterEffect spaceships |
+	| positionBeforeMoonwalk spaceships |
 	spaceships := aBoard spaceshipPositions keys.
-	positionsAfterEffect := Dictionary new.
 	 spaceships do: [ :eachSpaceship | 
 		(eachSpaceship) == aSpaceship ifFalse: [ 
-			positionsAfterEffect at: eachSpaceship put: (number *(-1)).
-			 ] ].
-	^positionsAfterEffect .
+			positionBeforeMoonwalk := aBoard positionOf: (eachSpaceship).
+			aBoard
+				move: (eachSpaceship)
+				back: (number*(-1))
+				from: positionBeforeMoonwalk ] ].
 ]
 
 { #category : #initialization }

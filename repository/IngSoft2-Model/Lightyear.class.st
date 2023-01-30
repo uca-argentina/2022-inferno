@@ -27,23 +27,23 @@ Lightyear class >> distanceOf: aDistance [
 { #category : #actions }
 Lightyear >> <= aDistance [
 	
-	^ self distance <= aDistance distanceInLightYears .
+	^ self amountInParsecs <= aDistance amountInParsecs .
 ]
 
 { #category : #actions }
-Lightyear >> distance [
+Lightyear >> amount [
 
 	^ distance
 ]
 
 { #category : #actions }
-Lightyear >> distanceInLightYears [
+Lightyear >> amountInLightYears [
 
 	^ distance
 ]
 
 { #category : #actions }
-Lightyear >> distancetInParsecs [
+Lightyear >> amountInParsecs [
 
 	^ distance / 3
 ]

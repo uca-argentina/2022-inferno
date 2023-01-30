@@ -1045,7 +1045,7 @@ ZathuraTest >> test21SpaceshipCanAskWhatCardsItHasInHand [
 		                      aHand2 }.
 	zathura := Zathura playWith: aDiceCup over: aBoard dealing: aCollectionOfHands.
 	spaceshipHand := zathura showCardsOnHandFor: 'Millenium Falcon'.
-	self assert: spaceshipHand equals: aHand2 deck
+	self assert: spaceshipHand equals: aHand2 showHand
 ]
 
 { #category : #tests }
@@ -1357,7 +1357,7 @@ ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 				exampleCardOne }.
 	self
 		assert: (zathura showCardsOnHandFor: 'Millenium Falcon')
-		equals: expectedHandAfterUsage deck.
+		equals: expectedHandAfterUsage showHand.
 	emptyCollection := OrderedCollection new.
 	self
 		assert: (zathura cardsBeingAppliedOn: 'General')
@@ -1420,7 +1420,7 @@ ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 				exampleCardOne }.
 	self
 		assert: (zathura showCardsOnHandFor: 'Millenium Falcon')
-		equals: expectedHandAfterUsage deck.
+		equals: expectedHandAfterUsage showHand.
 	emptyCollection := OrderedCollection new.
 	self
 		assert: (zathura cardsBeingAppliedOn: 'Millenium Falcon')
@@ -1483,7 +1483,7 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 				exampleCardOne }.
 	self
 		assert: (zathura showCardsOnHandFor: 'Millenium Falcon')
-		equals: expectedHandAfterUsage deck.
+		equals: expectedHandAfterUsage showHand.
 	emptyCollection := OrderedCollection new.
 	self
 		assert: (zathura cardsBeingAppliedOn: 'SC30 StarFighter')

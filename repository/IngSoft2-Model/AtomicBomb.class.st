@@ -11,8 +11,3 @@ Class {
 AtomicBomb >> applyTo: aBoard by: aSpaceship [
 	aBoard moveAllSpaceshipsToStartOfLap.
 ]
-
-{ #category : #asserting }
-AtomicBomb >> assertThatIsACard [
-	^false.
-]
