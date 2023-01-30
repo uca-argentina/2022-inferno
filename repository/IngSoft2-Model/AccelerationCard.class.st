@@ -26,6 +26,12 @@ AccelerationCard >> checkIfItIsAValidCard [
 ]
 
 { #category : #assertions }
+AccelerationCard >> effectOnPlay [
+
+	^ 1
+]
+
+{ #category : #assertions }
 AccelerationCard >> effectOnRoll [
 
 	^ 1

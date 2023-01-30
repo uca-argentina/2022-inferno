@@ -13,8 +13,8 @@ Class {
 { #category : #'class initialization' }
 Hand class >> assertThatCollectionIsAllCards: aCollectionOfCards [
 
-	aCollectionOfCards do: [ :card | 
-		card assertThatIsACard ifFalse: [ Error signal: 'Cant have a hand containing anything but a type of card.' ] ].
+	(aCollectionOfCards anySatisfy:[ :card | card assertThatIsACard not])
+	ifTrue: [ Error signal: 'Cant have a hand containing anything but a type of card.' ]. 
 ]
 
 { #category : #'class initialization' }
@@ -27,16 +27,15 @@ Hand class >> containing: aCollectionOfCards [
 { #category : #playing }
 Hand >> addPickedCardToHand: aCard [
 
-	[aCard assertThatIsACard] on: Exception do: [ ^aCard ].
-
-	deck addLast: aCard.
-	^aCard
+	aCard assertThatIsACard
+		ifTrue: [ deck addLast: aCard ].
+	^ aCard
 ]
 
 { #category : #playing }
 Hand >> assertCardIsOnHand: cardToPlay [
 
-	cardToPlay ifNil: [ 
+	(cardToPlay assertThatIsACard)ifFalse: [ 
 		Error signal: 'Spaceship does not have a card of that type' ]
 ]
 
@@ -46,12 +45,31 @@ Hand >> cardsOnHand [
 	^ deck size
 ]
 
+{ #category : #getter }
+Hand >> deck [
+
+	^ deck
+]
+
 { #category : #initialization }
 Hand >> initializeContaining: aCollectionOfCards [
 
 	deck := OrderedCollection new.
 	deck addAllFirst: aCollectionOfCards.
 	^self 
+]
+
+{ #category : #playing }
+Hand >> play: aCard [
+
+	| cardToPlay |
+	cardToPlay := nil.
+	cardToPlay := deck
+		              detect: [ :eachCard | aCard = eachCard ]
+		              ifNone: [ nil ].
+	deck remove: cardToPlay.
+	self assertCardIsOnHand: cardToPlay.
+	^ cardToPlay
 ]
 
 { #category : #playing }
