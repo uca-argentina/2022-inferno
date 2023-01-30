@@ -10,11 +10,9 @@ Class {
 { #category : #applying }
 SpeedUp >> applyTo: aBoard by: aSpaceship [
 
-	| positionBeforeSpeedUp  speedUpNumber |
-	positionBeforeSpeedUp := aBoard positionOf: aSpaceship.
+	| speedUpNumber positionsAfterEffect |
 	speedUpNumber := 4.
-	aBoard
-		move: aSpaceship
-		withoutTriggeringNewEffectsfrom: positionBeforeSpeedUp
-		to: speedUpNumber
+	positionsAfterEffect := Dictionary new: 1.
+	positionsAfterEffect at: aSpaceship put: speedUpNumber.
+	^positionsAfterEffect .
 ]

@@ -14,10 +14,9 @@ CancellationCard >> = aCard [
 	^ self class = aCard class
 ]
 
-{ #category : #assertions }
+{ #category : #asserting }
 CancellationCard >> assertThatIsACard [
-
-	^ self checkIfItIsAValidCard
+	^self checkIfItIsAValidCard .
 ]
 
 { #category : #assertions }

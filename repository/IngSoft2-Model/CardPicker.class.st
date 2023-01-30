@@ -12,6 +12,6 @@ Class {
 CardPicker >> applyTo: aBoard by: aSpaceship [
 
 	| pickedCard |
-	pickedCard := aBoard dealer dealOne.
+	pickedCard := aBoard dealCard.
 	^ pickedCard
 ]
