@@ -116,9 +116,38 @@ Board >> applyLastEffectTo: aSpaceship [
 	^ cardPicked
 ]
 
+{ #category : #cardDealing }
+Board >> dealOneCard [
+	^ self dealer dealOne.
+]
+
 { #category : #getters }
 Board >> dealer [
 	^ cardDealer.
+]
+
+{ #category : #effectApplying }
+Board >> executeAnHyperJumpTo: aSpaceship of: parsecsForThisJump [
+	| positionBeforeJump jumpNumber |
+	positionBeforeJump := self positionOf: aSpaceship.
+	jumpNumber := (self getAmountOfSpotsToMoveGivenParsecs: parsecsForThisJump).
+	self 
+		move: aSpaceship 
+		withoutTriggeringNewEffectsfrom: positionBeforeJump 
+		to: jumpNumber 
+]
+
+{ #category : #getters }
+Board >> getAmountOfSpotsToMoveGivenParsecs: anAmountOfParsecs [
+
+| amountOfSpots parsecsPerSpot  amountOfParsecsToMove amountOfSpotsToMove |
+lengthInParsecs :=  self lengthInParsecs.
+amountOfSpots := self lengthInSpots .
+parsecsPerSpot := lengthInParsecs / amountOfSpots.
+amountOfParsecsToMove := anAmountOfParsecs distancetInParsecs.
+amountOfSpotsToMove := amountOfParsecsToMove // parsecsPerSpot.
+^ amountOfSpotsToMove
+
 ]
 
 { #category : #initialization }
