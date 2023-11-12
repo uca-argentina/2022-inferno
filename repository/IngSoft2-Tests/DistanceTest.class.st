@@ -70,3 +70,17 @@ DistanceTest >> test06SixLightYearsEqualTwoParsecs [
 	
 	self assert: aDistanceInParsecs distance equals: aDistanceInLightYears distancetInParsecs.
 ]
+
+{ #category : #tests }
+DistanceTest >> test07ParsecsCanHaveADecimalAmount [
+	| aParsec |
+	aParsec := Parsec distanceOf: 0.5.
+	self assert: aParsec isValid
+]
+
+{ #category : #tests }
+DistanceTest >> test08ParsecsCanHaveADecimalAmount [
+	| aLightYear |
+	aLightYear  := Lightyear  distanceOf: 0.5.
+	self assert: aLightYear  isValid
+]

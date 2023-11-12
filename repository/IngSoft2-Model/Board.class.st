@@ -127,6 +127,36 @@ Board >> dealer [
 ]
 
 { #category : #effectApplying }
+Board >> executeAMoonwalkTo: aSpaceship of: aMoonwalkNumber [ 
+	| spaceships positionBeforeMoonwalk |
+	spaceships := self spaceshipPositions keys.
+	 spaceships do: [ :eachSpaceship | 
+		(eachSpaceship) == aSpaceship ifFalse: [ 
+			positionBeforeMoonwalk := self positionOf: (eachSpaceship).
+			self
+				move: (eachSpaceship)
+				back: (aMoonwalkNumber*(-1))
+				from: positionBeforeMoonwalk ] ].
+]
+
+{ #category : #effectApplying }
+Board >> executeASpeedUpTo: aSpaceship of: aSpeedUpNumber [	
+	| positionBeforeSpeedUp |
+	positionBeforeSpeedUp := self positionOf: aSpaceship.
+	self
+		move: aSpaceship
+		withoutTriggeringNewEffectsfrom: positionBeforeSpeedUp
+		to: aSpeedUpNumber
+]
+
+{ #category : #effectApplying }
+Board >> executeAWormholeTo: aSpaceship of: aWormholeNumber [ 
+	| positionBeforeWormhole  |
+	positionBeforeWormhole := self positionOf: aSpaceship.
+	self move: aSpaceship back: aWormholeNumber from: positionBeforeWormhole..
+]
+
+{ #category : #effectApplying }
 Board >> executeAnHyperJumpTo: aSpaceship of: parsecsForThisJump [
 	| positionBeforeJump jumpNumber |
 	positionBeforeJump := self positionOf: aSpaceship.

@@ -7,14 +7,16 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #effectApplying }
+SpeedUp >> applySpeedUpIn: aBoard to: aSpaceship [ 
+	| speedUpNumber |
+	speedUpNumber := 4.
+	aBoard executeASpeedUpTo: aSpaceship of: speedUpNumber .
+	
+]
+
 { #category : #applying }
 SpeedUp >> applyTo: aBoard by: aSpaceship [
 
-	| positionBeforeSpeedUp  speedUpNumber |
-	positionBeforeSpeedUp := aBoard positionOf: aSpaceship.
-	speedUpNumber := 4.
-	aBoard
-		move: aSpaceship
-		withoutTriggeringNewEffectsfrom: positionBeforeSpeedUp
-		to: speedUpNumber
+	self applySpeedUpIn: aBoard to: aSpaceship
 ]

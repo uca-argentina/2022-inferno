@@ -10,8 +10,12 @@ Class {
 { #category : #applying }
 Wormhole >> applyTo: aBoard by: aSpaceship [
 
-	| positionBeforeWormhole  wormholeNumber |
+	self applyWormholeIn: aBoard to: aSpaceship
+]
+
+{ #category : #effectApplying }
+Wormhole >> applyWormholeIn: aBoard to: aSpaceship [ 
+	|  wormholeNumber |
 	wormholeNumber := -4.
-	positionBeforeWormhole := aBoard positionOf: aSpaceship.
-	aBoard move: aSpaceship back: wormholeNumber from: positionBeforeWormhole.
+	aBoard executeAWormholeTo: aSpaceship of: wormholeNumber 
 ]
