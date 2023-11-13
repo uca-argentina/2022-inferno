@@ -66,10 +66,11 @@ HandTest >> test04AHandCanReturnACardThatIsPresentInThatDeck [
 { #category : #tests }
 HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 
-	| aHand exampleCardOne exampleCardTwo cardToAdd aCollectionOfSpots firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot aCollectionOfSpaceships |
+	| aHand exampleCardOne exampleCardTwo cardToAdd aCollectionOfSpots firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot aCollectionOfSpaceships aCardDealer |
+	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand := Hand containing: { 
+	aHand := Hand containing: {
 			         exampleCardOne.
 			         exampleCardTwo }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -79,7 +80,7 @@ HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: SpeedUp new.
 
-	aCollectionOfSpots := { 
+	aCollectionOfSpots := {
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -87,7 +88,12 @@ HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 		                      fifthSpot.
 		                      sixthSpot }.
 	aCollectionOfSpaceships := { 'testShipOne'. 'testShipTwo' }.
-	cardToAdd := Board with: aCollectionOfSpots and: 100 playedFor: 3 by: aCollectionOfSpaceships.
+	cardToAdd := Board
+		             with: aCollectionOfSpots
+		             and: 100
+		             playedFor: 3
+		             by: aCollectionOfSpaceships
+		             DealtBy: aCardDealer.
 	aHand addPickedCardToHand: cardToAdd.
-	self assert: aHand cardsOnHand equals: 2.
+	self assert: aHand cardsOnHand equals: 2
 ]

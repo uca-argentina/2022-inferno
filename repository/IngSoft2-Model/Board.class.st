@@ -49,7 +49,7 @@ Board class >> assertValidLengthInParsecs: anAmountOfParsecs [
 ]
 
 { #category : #'class initialization' }
-Board class >> with: aCollectionOfSpots and: aLengthInParsecs playedFor: anAmountOfLaps by: aCollectionOfSpaceships [
+Board class >> with: aCollectionOfSpots and: aLengthInParsecs playedFor: anAmountOfLaps by: aCollectionOfSpaceships DealtBy: aCardDealer [
 
 	self assertValidAmountOfSpots: aCollectionOfSpots.
 	self assertValidLengthInParsecs: aLengthInParsecs.
@@ -60,6 +60,7 @@ Board class >> with: aCollectionOfSpots and: aLengthInParsecs playedFor: anAmoun
 		  and: aLengthInParsecs
 		  around: anAmountOfLaps
 		  playedBy: aCollectionOfSpaceships
+		  DealtBy: aCardDealer
 ]
 
 { #category : #getters }
@@ -181,7 +182,7 @@ amountOfSpotsToMove := amountOfParsecsToMove // parsecsPerSpot.
 ]
 
 { #category : #initialization }
-Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmountOfLaps playedBy: aCollectionOfSpaceships [
+Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmountOfLaps playedBy: aCollectionOfSpaceships DealtBy: aCardDealer [
 
 	| amountOfSpaceships |
 	layout := aCollectionOfSpots.
@@ -191,8 +192,8 @@ Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmou
 	amountOfSpaceships := aCollectionOfSpaceships size.
 	lastEffectAplied := NoEffect new.
 	spaceshipsPositions := Dictionary new: amountOfSpaceships.
-	cardDealer := Dealer new.
-	1 to: amountOfSpaceships do: [ :spaceship | 
+	cardDealer := aCardDealer.
+	1 to: amountOfSpaceships do: [ :spaceship |
 		spaceshipsPositions
 			at: (aCollectionOfSpaceships at: spaceship)
 			put: (Position at: 0 on: 1) ]
