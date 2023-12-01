@@ -254,7 +254,7 @@ Board >> move: aSpaceship from: positionBeforeRoll to: rollNumber [
 	(self isLapFinishedIf: spotBeforeRoll moves: rollNumber)
 		ifTrue: [ 
 			lapBeforeRoll + 1 >= laps
-				ifTrue: [ cardPicked := self moveToFinishLine: aSpaceship ]
+				ifTrue: [ self moveToFinishLine: aSpaceship ]
 				ifFalse: [ 
 					spotAfterLapping := spotBeforeRoll + rollNumber - length.
 					self move: aSpaceship to: lapBeforeRoll + 1 and: spotAfterLapping.

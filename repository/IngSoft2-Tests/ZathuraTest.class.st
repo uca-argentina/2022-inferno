@@ -1288,14 +1288,17 @@ ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 { #category : #tests }
 ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands cardToUse aCardDealer |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands cardToUse aCardDealer aRedoCard |
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
+	aRedoCard := RedoCard new.
 	error := Error.
 	errorMessage := 'Cannot use redo card on a permanent if it is not this spaceships  turn.'.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: {
+			               SpeedCard new.
+			               OverloadCard new }.
 	aCollectionOfSpots := {
 		                      firstSpot.
 		                      secondSpot.
@@ -1335,7 +1338,10 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 	zathura
 		currentSpaceshipPlaysCard: cardToUse
 		playedBy: 'SC30 StarFighter'.
-	invalidCardUse := [ zathura redoLastCardPlayedBy: 'Millenium Falcon' ].
+	invalidCardUse := [
+	                  zathura
+		                  redoLastCardPlayedBy: 'Millenium Falcon'
+		                  with: aRedoCard ].
 
 	self should: invalidCardUse raise: error withMessage: errorMessage
 ]
@@ -1343,7 +1349,7 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 { #category : #tests }
 ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer aRedoCard |
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -1358,7 +1364,9 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 		                      fourthSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: {
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 10
@@ -1387,7 +1395,11 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 		           playWith: aDiceCup
 		           over: aBoard
 		           dealing: aCollectionOfHands.
-	invalidCardUse := [ zathura redoLastCardPlayedBy: 'Millenium Falcon' ].
+	aRedoCard := RedoCard new.
+	invalidCardUse := [
+	                  zathura
+		                  redoLastCardPlayedBy: 'Millenium Falcon'
+		                  with: aRedoCard ].
 
 	self should: invalidCardUse raise: error withMessage: errorMessage
 ]

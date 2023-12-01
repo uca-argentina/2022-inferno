@@ -55,20 +55,24 @@ Zathura >> applierFor: aCard by: aSpaceship [
 { #category : #cardApplying }
 Zathura >> applierFor: aCard to: affectedSpaceship by: aSpaceship [
 
-	(self assertThatIsOverloadOrSpeed: aCard) ifTrue: [ 
+	(self assertThatIsOverloadOrSpeed: aCard) ifTrue: [
 		self
 			currentSpaceshipPlaysCard: aCard
 			applyTo: affectedSpaceship
 			playedBy: aSpaceship ].
 
-	(self assertThatIsCancellationCard: aCard) ifTrue: [ 
+	(self assertThatIsCancellationCard: aCard) ifTrue: [
 		self
 			cancelCard: (affectedSpaceship at: 2)
 			from: (affectedSpaceship at: 1)
-			playedBy: aSpaceship ].
-		
-	(self assertThatIsRepeatCard: aCard) ifTrue: [ 
-		self repeatEffectCardPlayedBy: aSpaceship applyTo: affectedSpaceship ]
+			playedBy: aSpaceship
+			with: aCard ].
+
+	(self assertThatIsRepeatCard: aCard) ifTrue: [
+		self
+			repeatEffectCardPlayedBy: aSpaceship
+			applyTo: affectedSpaceship
+			with: aCard ]
 ]
 
 { #category : #assertions }
@@ -147,14 +151,12 @@ Zathura >> assertThatIsValidCardType: aCard [
 ]
 
 { #category : #cardApplying }
-Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship [
+Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: aCancelCard [
 
-	| cancelCard |
 	self assert: aCard isBeingAppliedTo: aSpaceship.
-	cancelCard := CancellationCard new.
-	(spaceshipHands at: anotherSpaceship) play: cancelCard.
+	(spaceshipHands at: anotherSpaceship) play: aCancelCard.
 	(cardsBeingApplied at: aSpaceship) remove: aCard.
-	lastCardPlayed := cancelCard
+	lastCardPlayed := aCancelCard
 ]
 
 { #category : #cardApplying }
@@ -172,20 +174,27 @@ Zathura >> cardApplicator [
 ]
 
 { #category : #cardApplying }
-Zathura >> cardRedoerWith: aCard to: affectedSpaceship by: aSpaceship [
+Zathura >> cardRedoerWith: aRedoCard to: affectedSpaceship by: aSpaceship [
 
-	(self assertThatIsRedoCard: aCard) ifFalse: [ ^ self ].
-	(self assertThatIsOverloadOrSpeed: lastCardPlayed) ifTrue: [ 
-		self redoLastCardPlayedBy: aSpaceship applyTo: affectedSpaceship ].
-	(self assertThatIsOfTypeAcceleration: lastCardPlayed) ifTrue: [ 
-		self redoLastCardPlayedBy: aSpaceship ].
-	(self assertThatIsCancellationCard: lastCardPlayed) ifTrue: [ 
+	(self assertThatIsRedoCard: aRedoCard) ifFalse: [ ^ self ].
+	(self assertThatIsOverloadOrSpeed: lastCardPlayed) ifTrue: [
+		self
+			redoLastCardPlayedBy: aSpaceship
+			applyTo: affectedSpaceship
+			with: aRedoCard ].
+	(self assertThatIsOfTypeAcceleration: lastCardPlayed) ifTrue: [
+		self redoLastCardPlayedBy: aSpaceship with: aRedoCard ].
+	(self assertThatIsCancellationCard: lastCardPlayed) ifTrue: [
 		self
 			redoCancelationCard: (affectedSpaceship at: 2)
 			from: (affectedSpaceship at: 1)
-			PlayedBy: aSpaceship ].
-	(self assertThatIsRepeatCard: lastCardPlayed) ifTrue: [ 
-		self redoRepeatCardPlayedBy: aSpaceship applyTo: affectedSpaceship ]
+			PlayedBy: aSpaceship
+			with: aRedoCard ].
+	(self assertThatIsRepeatCard: lastCardPlayed) ifTrue: [
+		self
+			redoRepeatCardPlayedBy: aSpaceship
+			applyTo: affectedSpaceship
+			with: aRedoCard  ]
 ]
 
 { #category : #getters }
@@ -310,32 +319,25 @@ Zathura >> rankingOfSpaceships [
 ]
 
 { #category : #cardApplying }
-Zathura >> redoCancelationCard: aCard from: aSpaceship PlayedBy: anotherSpaceship [
+Zathura >> redoCancelationCard: aCard from: aSpaceship PlayedBy: anotherSpaceship with: aRedoCard [
 
-	| redoCard |
-	redoCard := RedoCard new.
-	(spaceshipHands at: anotherSpaceship) play: redoCard.
-	(spaceshipHands at: anotherSpaceship) addPickedCardToHand: lastCardPlayed.
-	self cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship
+	| aCancelCard |
+	(spaceshipHands at: anotherSpaceship) play: aRedoCard.
+	(spaceshipHands at: anotherSpaceship) addPickedCardToHand:
+		lastCardPlayed.
+		aCancelCard := lastCardPlayed .
+	self
+		cancelCard: aCard
+		from: aSpaceship
+		playedBy: anotherSpaceship
+		with: aCancelCard
 ]
 
 { #category : #cardApplying }
-Zathura >> redoLastCardPlayedBy: aSpaceship [
+Zathura >> redoLastCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aRedoCard [
 
-	| redoCard |
-	redoCard := RedoCard new.
-	(spaceshipHands at: aSpaceship) play: redoCard.
-	self assertSpaceshipCanPlayCard: aSpaceship.
-	(spaceshipHands at: aSpaceship) addPickedCardToHand: lastCardPlayed.
-	self currentSpaceshipPlaysCard: lastCardPlayed playedBy: aSpaceship
-]
 
-{ #category : #cardApplying }
-Zathura >> redoLastCardPlayedBy: aSpaceship applyTo: anotherSpaceship [
-
-	| redoCard |
-	redoCard := RedoCard new.
-	(spaceshipHands at: anotherSpaceship) play: redoCard.
+	(spaceshipHands at: anotherSpaceship) play: aRedoCard.
 	self assertSpaceshipCanPlayCard: aSpaceship.
 	(spaceshipHands at: anotherSpaceship) addPickedCardToHand: lastCardPlayed.
 	self
@@ -345,24 +347,33 @@ Zathura >> redoLastCardPlayedBy: aSpaceship applyTo: anotherSpaceship [
 ]
 
 { #category : #cardApplying }
-Zathura >> redoRepeatCardPlayedBy: aSpaceship applyTo: anotherSpaceship [
-
-	| redoCard |
-	redoCard := RedoCard new.
-	(spaceshipHands at: aSpaceship) play: redoCard.
+Zathura >> redoLastCardPlayedBy: aSpaceship with: aRedoCard [
+	
+	(spaceshipHands at: aSpaceship) play: aRedoCard.
+	self assertSpaceshipCanPlayCard: aSpaceship.
 	(spaceshipHands at: aSpaceship) addPickedCardToHand: lastCardPlayed.
-	self repeatEffectCardPlayedBy: aSpaceship applyTo: anotherSpaceship
+	self currentSpaceshipPlaysCard: lastCardPlayed playedBy: aSpaceship
 ]
 
 { #category : #cardApplying }
-Zathura >> repeatEffectCardPlayedBy: aSpaceship applyTo: anotherSpaceship [
+Zathura >> redoRepeatCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aRedoCard [
 
-	| repeatCard cardPicked |
-	repeatCard := RepeatCard new.
-	(spaceshipHands at: anotherSpaceship) play: repeatCard.
+	(spaceshipHands at: aSpaceship) play: aRedoCard.
+	(spaceshipHands at: aSpaceship) addPickedCardToHand: lastCardPlayed.
+	self
+		repeatEffectCardPlayedBy: aSpaceship
+		applyTo: anotherSpaceship
+		with: lastCardPlayed 
+]
+
+{ #category : #cardApplying }
+Zathura >> repeatEffectCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aRepeatCard [
+
+	|  cardPicked |
+	(spaceshipHands at: anotherSpaceship) play: aRepeatCard.
 	cardPicked := board applyLastEffectTo: anotherSpaceship.
 	(spaceshipHands at: anotherSpaceship) addPickedCardToHand: cardPicked.
-	lastCardPlayed := repeatCard
+	lastCardPlayed := aRepeatCard
 ]
 
 { #category : #getters }

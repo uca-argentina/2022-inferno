@@ -4,6 +4,17 @@ Class {
 	#category : #'IngSoft2-Tests'
 }
 
+{ #category : #asserting }
+HandTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMessage [
+
+	| errorWasRaised errorMessage |
+	errorBlock
+		on: errorClass
+		do: [ :error | 
+			errorWasRaised := true.
+			errorMessage := error messageText ]
+]
+
 { #category : #tests }
 HandTest >> test01AHandIsInitializedWithTwoCards [
 
@@ -96,4 +107,24 @@ HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 		             DealtBy: aCardDealer.
 	aHand addPickedCardToHand: cardToAdd.
 	self assert: aHand cardsOnHand equals: 2
+]
+
+{ #category : #tests }
+HandTest >> test06PlayingACardNotInTheHandRaisesAnError [
+
+	| aHand testHand exampleCardOne exampleCardTwo typeOfCardToTake testCard invalidMove error errorMsg |
+	testHand := Array new: 2.
+	exampleCardOne := SpeedCard new.
+	exampleCardTwo := SpeedCard  new.
+	testCard := SpeedCard new.
+	testHand at: 1 put: exampleCardOne.
+	testHand at: 2 put: exampleCardTwo.
+	typeOfCardToTake := OverloadCard new.
+	error:= Error.
+	errorMsg :='You cannot play a card you don''t have in your hand.'.
+	aHand := Hand containing: { 
+			         exampleCardOne.
+			         exampleCardTwo }.
+	invalidMove := [ aHand play: typeOfCardToTake  ].
+	self should: invalidMove raise: error withMessage: errorMsg 
 ]
