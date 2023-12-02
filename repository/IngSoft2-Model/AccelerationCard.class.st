@@ -25,6 +25,16 @@ AccelerationCard >> checkIfItIsAValidCard [
 	^ true
 ]
 
+{ #category : #creating }
+AccelerationCard >> createOwnAction [
+	^ AccelerationAction new.
+]
+
+{ #category : #redoer }
+AccelerationCard >> createOwnRedoAction [
+	^RedoAccelerationaction
+]
+
 { #category : #assertions }
 AccelerationCard >> effectOnPlay [
 

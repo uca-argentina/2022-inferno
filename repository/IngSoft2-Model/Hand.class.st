@@ -27,10 +27,11 @@ Hand class >> containing: aCollectionOfCards [
 { #category : #playing }
 Hand >> addPickedCardToHand: aCard [
 
-	[aCard assertThatIsACard] on: Exception do: [ ^aCard ].
-
-	deck addLast: aCard.
-	^aCard
+	(aCard respondsTo: #assertThatIsACard)
+		ifTrue: [
+			aCard assertThatIsACard
+				ifTrue: [ deck addLast: aCard ] ].
+	^ aCard
 ]
 
 { #category : #playing }

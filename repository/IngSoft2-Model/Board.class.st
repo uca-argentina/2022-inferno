@@ -89,32 +89,37 @@ Board >> applyEffect: aSpaceship [
 
 { #category : #effectApplying }
 Board >> applyEffectTriggeredBy: aSpaceship [
+    | spotNumber resultOfEffectApplying |
 
-	| spotNumber resultOfEffectApplying cardPicked |
-	spotNumber := (self positionOf: aSpaceship) spotNumber.
-	lastEffectAplied := (layout at: spotNumber) effectAtSpot.
-	resultOfEffectApplying := lastEffectAplied
-		                          applyTo: self
-		                          by: aSpaceship.
-	[ resultOfEffectApplying assertThatIsACard ]
-		on: Exception
-		do: [ ^ self ].
-	cardPicked := resultOfEffectApplying.
-	^ cardPicked
+    spotNumber := (self positionOf: aSpaceship) spotNumber.
+    lastEffectAplied := (layout at: spotNumber) effectAtSpot.
+
+    resultOfEffectApplying := lastEffectAplied applyTo: self by: aSpaceship.
+
+    (resultOfEffectApplying respondsTo: #assertThatIsACard)
+        ifTrue: [
+            (resultOfEffectApplying assertThatIsACard)
+                ifTrue: [ ^ resultOfEffectApplying ]
+                ifFalse: [ ^ self ].
+        ]
+        ifFalse: [ ^ self ].
+
 ]
 
 { #category : #effectApplying }
 Board >> applyLastEffectTo: aSpaceship [
+    | resultOfEffectApplying  |
 
-	| resultOfEffectApplying cardPicked |
-	resultOfEffectApplying := lastEffectAplied
-		                          applyTo: self
-		                          by: aSpaceship.
-	[ resultOfEffectApplying assertThatIsACard ]
-		on: Exception
-		do: [ ^ self ].
-	cardPicked := resultOfEffectApplying.
-	^ cardPicked
+    resultOfEffectApplying := lastEffectAplied applyTo: self by: aSpaceship.
+
+    (resultOfEffectApplying respondsTo: #assertThatIsACard)
+        ifTrue: [
+            (resultOfEffectApplying assertThatIsACard)
+                ifTrue: [ ^ resultOfEffectApplying ]
+                ifFalse: [ ^ self ].
+        ]
+        ifFalse: [ ^ self ].
+
 ]
 
 { #category : #cardDealing }

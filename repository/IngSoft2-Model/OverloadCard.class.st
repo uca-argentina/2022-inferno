@@ -25,6 +25,11 @@ OverloadCard >> checkIfItIsAValidCard [
 	^ true
 ]
 
+{ #category : #creating }
+OverloadCard >> createOwnAction [
+	^ OverloadAction new.
+]
+
 { #category : #effect }
 OverloadCard >> effectOnPlay [
 

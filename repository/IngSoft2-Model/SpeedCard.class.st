@@ -25,6 +25,21 @@ SpeedCard >> checkIfItIsAValidCard [
 	^ true
 ]
 
+{ #category : #creating }
+SpeedCard >> createOwnAction [
+	^ SpeedAction new.
+]
+
+{ #category : #redoer }
+SpeedCard >> createOwnRedoAction [
+	^ RedoSpeedAction new.
+]
+
+{ #category : #redoer }
+SpeedCard >> createRedo [
+	self shouldBeImplemented.
+]
+
 { #category : #playing }
 SpeedCard >> effectOnPlay [
 

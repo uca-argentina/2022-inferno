@@ -45,36 +45,6 @@ Zathura class >> selfAssertEachPlayerHasTwoCardsAtTheBegining: aCollectionOfHand
 			Error signal: 'All players should start with 2 cards' ] ]
 ]
 
-{ #category : #cardApplying }
-Zathura >> applierFor: aCard by: aSpaceship [
-
-	(self assertThatIsOfTypeAcceleration: aCard) ifTrue: [ 
-		self currentSpaceshipPlaysCard: aCard playedBy: aSpaceship ]
-]
-
-{ #category : #cardApplying }
-Zathura >> applierFor: aCard to: affectedSpaceship by: aSpaceship [
-
-	(self assertThatIsOverloadOrSpeed: aCard) ifTrue: [
-		self
-			currentSpaceshipPlaysCard: aCard
-			applyTo: affectedSpaceship
-			playedBy: aSpaceship ].
-
-	(self assertThatIsCancellationCard: aCard) ifTrue: [
-		self
-			cancelCard: (affectedSpaceship at: 2)
-			from: (affectedSpaceship at: 1)
-			playedBy: aSpaceship
-			with: aCard ].
-
-	(self assertThatIsRepeatCard: aCard) ifTrue: [
-		self
-			repeatEffectCardPlayedBy: aSpaceship
-			applyTo: affectedSpaceship
-			with: aCard ]
-]
-
 { #category : #assertions }
 Zathura >> assert: aCard isBeingAppliedTo: aSpaceship [
 
@@ -113,43 +83,6 @@ Zathura >> assertSpaceshipCanPlayCard: aSpaceship [
 		Error signal: 'Cannot play this card when it is not your turn' ]
 ]
 
-{ #category : #assertions }
-Zathura >> assertThatIsCancellationCard: aCard [
-
-	^ aCard = CancellationCard new
-]
-
-{ #category : #assertions }
-Zathura >> assertThatIsOfTypeAcceleration: aCard [
-
-	^ aCard = AccelerationCard new
-]
-
-{ #category : #assertions }
-Zathura >> assertThatIsOverloadOrSpeed: aCard [
-
-	^ aCard = OverloadCard new | (aCard = SpeedCard new)
-]
-
-{ #category : #assertions }
-Zathura >> assertThatIsRedoCard: aCard [
-
-	^ aCard = RedoCard new
-]
-
-{ #category : #assertions }
-Zathura >> assertThatIsRepeatCard: aCard [
-
-	^ aCard = RepeatCard new
-]
-
-{ #category : #assertions }
-Zathura >> assertThatIsValidCardType: aCard [
-
-	((self assertThatIsOverloadOrSpeed: aCard) or: ((self assertThatIsOfTypeAcceleration: aCard) or: ((self assertThatIsCancellationCard: aCard) or: ((self assertThatIsRepeatCard: aCard)or: (self assertThatIsRedoCard: aCard))))) ifFalse: [ 
-		Error signal: 'no existe ese tipo de carta' ]
-]
-
 { #category : #cardApplying }
 Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: aCancelCard [
 
@@ -171,30 +104,6 @@ Zathura >> cardApplicator [
 	cardsAffectingRoll do: [ :card | 
 		addToRoll := addToRoll + card effectOnPlay ].
 	^ addToRoll
-]
-
-{ #category : #cardApplying }
-Zathura >> cardRedoerWith: aRedoCard to: affectedSpaceship by: aSpaceship [
-
-	(self assertThatIsRedoCard: aRedoCard) ifFalse: [ ^ self ].
-	(self assertThatIsOverloadOrSpeed: lastCardPlayed) ifTrue: [
-		self
-			redoLastCardPlayedBy: aSpaceship
-			applyTo: affectedSpaceship
-			with: aRedoCard ].
-	(self assertThatIsOfTypeAcceleration: lastCardPlayed) ifTrue: [
-		self redoLastCardPlayedBy: aSpaceship with: aRedoCard ].
-	(self assertThatIsCancellationCard: lastCardPlayed) ifTrue: [
-		self
-			redoCancelationCard: (affectedSpaceship at: 2)
-			from: (affectedSpaceship at: 1)
-			PlayedBy: aSpaceship
-			with: aRedoCard ].
-	(self assertThatIsRepeatCard: lastCardPlayed) ifTrue: [
-		self
-			redoRepeatCardPlayedBy: aSpaceship
-			applyTo: affectedSpaceship
-			with: aRedoCard  ]
 ]
 
 { #category : #getters }
@@ -271,13 +180,18 @@ Zathura >> initializeWith: aDiceCup over: aBoard dealing: handsOfCards [
 	cardsBeingApplied at: 'General' put: OrderedCollection new
 ]
 
-{ #category : #playing }
-Zathura >> play: aCard by: aSpaceship affecting: affectedSpaceship [
+{ #category : #accessing }
+Zathura >> lastCardPlayed [
+	^ lastCardPlayed
+]
 
-	self applierFor: aCard to: affectedSpaceship by: aSpaceship.
-	self applierFor: aCard by: aSpaceship.
-	self cardRedoerWith: aCard to: affectedSpaceship by: aSpaceship.
-	self assertThatIsValidCardType: aCard
+{ #category : #playing }
+Zathura >> play: aCard by: aSpaceship affecting: affected [
+
+	| action |
+	action := aCard createOwnAction.
+	action on: self by: aSpaceship to: affected with: aCard
+	
 ]
 
 { #category : #playing }
