@@ -48,7 +48,7 @@ Zathura class >> selfAssertEachPlayerHasTwoCardsAtTheBegining: aCollectionOfHand
 { #category : #assertions }
 Zathura >> assert: aCard isBeingAppliedTo: aSpaceship [
 
-	((cardsBeingApplied at: aSpaceship) includes: aCard) ifFalse: [ 
+	((cardsBeingApplied to: aSpaceship) includes: aCard) ifFalse: [ 
 		Error signal:
 			'there is no card of that type being applied to that spaceship' ]
 ]
@@ -87,9 +87,9 @@ Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: a
 Zathura >> cardApplicator [
 
 	| cardsAffectingRoll cardsAffectingAllRolls addToRoll |
-	cardsAffectingRoll := cardsBeingApplied at:
+	cardsAffectingRoll := cardsBeingApplied to:
 		                      turnController activeSpaceship.
-	cardsAffectingAllRolls := cardsBeingApplied at: 'General'.
+	cardsAffectingAllRolls := cardsBeingApplied to: 'General'.
 	cardsAffectingRoll addAllLast: cardsAffectingAllRolls.
 	addToRoll := 0.
 	cardsAffectingRoll do: [ :card | 
@@ -100,7 +100,7 @@ Zathura >> cardApplicator [
 { #category : #getters }
 Zathura >> cardsBeingAppliedOn: aSpaceship [
 
-	^ cardsBeingApplied at: aSpaceship.
+	^ cardsBeingApplied to: aSpaceship.
 ]
 
 { #category : #cardApplying }
@@ -110,7 +110,7 @@ Zathura >> currentSpaceshipPlaysCard: aPermanentCard applyTo: aSpaceship playedB
 	self assertSpaceshipCanPlayCard: anotherSpaceship.
 	cardToApply := (spaceshipHands at: anotherSpaceship) play:
 		               aPermanentCard.
-	(cardsBeingApplied at: aSpaceship) addLast: aPermanentCard.
+	(cardsBeingApplied to: aSpaceship) addLast: aPermanentCard.
 	lastCardPlayed := cardToApply
 ]
 
@@ -121,7 +121,7 @@ Zathura >> currentSpaceshipPlaysCard: anAcceleratorCard playedBy: aSpaceship [
 	self assertSpaceshipCanPlayCard: aSpaceship.
 	cardToApply := (spaceshipHands at: aSpaceship) play:
 		               anAcceleratorCard.
-	(cardsBeingApplied at: 'General') addLast: anAcceleratorCard.
+	(cardsBeingApplied to: 'General') addLast: anAcceleratorCard.
 	lastCardPlayed := cardToApply
 ]
 
