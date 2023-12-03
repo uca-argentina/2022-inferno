@@ -54,15 +54,6 @@ Zathura >> assert: aCard isBeingAppliedTo: aSpaceship [
 ]
 
 { #category : #assertions }
-Zathura >> assertCorrectMethodForTypeOfCard: anAcceleratorCard [
-
-	| acceleratorCard |
-	acceleratorCard := AccelerationCard new.
-	anAcceleratorCard = acceleratorCard ifFalse: [ 
-		Error signal: 'Wrong method used, this is not an acceleration card' ]
-]
-
-{ #category : #assertions }
 Zathura >> assertGameIsFinished [
 
 	gameIsFinished ifTrue: [ 
@@ -128,7 +119,6 @@ Zathura >> currentSpaceshipPlaysCard: anAcceleratorCard playedBy: aSpaceship [
 
 	| cardToApply |
 	self assertSpaceshipCanPlayCard: aSpaceship.
-	self assertCorrectMethodForTypeOfCard: anAcceleratorCard.
 	cardToApply := (spaceshipHands at: aSpaceship) play:
 		               anAcceleratorCard.
 	(cardsBeingApplied at: 'General') addLast: anAcceleratorCard.
