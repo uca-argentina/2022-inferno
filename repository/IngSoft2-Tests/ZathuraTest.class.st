@@ -1653,3 +1653,56 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 		assert: (zathura cardsBeingAppliedOn: 'SC30 StarFighter')
 		equals: emptyCollection
 ]
+
+{ #category : #tests }
+ZathuraTest >> test30AssertASpaceshipRedoesOverloadCardUsingARedoCard [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
+	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := {
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := RedoCard new.
+	exampleCardTwo := OverloadCard new.
+	aHand1 := Hand containing: {
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: {
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := {
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	zathura playNextTurn.
+	zathura playNextTurn.
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := RedoCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	zathura playNextTurn.
+	zathura playNextTurn.
+
+	self assert: (zathura positionOf: 'Razor Crest') spotNumber equals: 1
+]

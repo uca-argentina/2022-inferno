@@ -32,7 +32,7 @@ AccelerationCard >> createOwnAction [
 
 { #category : #redoer }
 AccelerationCard >> createOwnRedoAction [
-	^RedoAccelerationaction
+	^ RedoAccelerationaction new.
 ]
 
 { #category : #assertions }

@@ -32,5 +32,5 @@ RepeatCard >> createOwnAction [
 
 { #category : #redoer }
 RepeatCard >> createOwnRedoAction [
-	^ RedoRepeatAction
+	^ RedoRepeatAction new.
 ]

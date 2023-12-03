@@ -272,7 +272,7 @@ Board >> move: aSpaceship from: positionBeforeRoll to: rollNumber [
 						to: lapBeforeRoll
 						and: spotBeforeRoll + rollNumber ]
 				ifTrue: [ 
-				self move: aSpaceship back: rollNumber from: spotBeforeRoll ].
+				self move: aSpaceship back: rollNumber from: positionBeforeRoll ].
 			cardPicked := self applyEffect: aSpaceship ].
 
 	^ cardPicked

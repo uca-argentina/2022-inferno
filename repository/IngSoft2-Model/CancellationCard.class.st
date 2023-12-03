@@ -33,5 +33,5 @@ CancellationCard >> createOwnAction [
 
 { #category : #redoer }
 CancellationCard >> createOwnRedoAction [
-	^ RedoCancellationAction
+	^ RedoCancellationAction new.
 ]
