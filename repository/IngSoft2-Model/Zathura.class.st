@@ -76,10 +76,12 @@ Zathura >> assertSpaceshipCanPlayCard: aSpaceship [
 
 { #category : #cardApplying }
 Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: aCancelCard [
-
+	|test1 test2|
 	self assert: aCard isBeingAppliedTo: aSpaceship.
 	(spaceshipHands at: anotherSpaceship) play: aCancelCard.
-	(cardsBeingApplied at: aSpaceship) remove: aCard.
+	test1 := (cardsBeingApplied to: aSpaceship).
+	(cardsBeingApplied to: aSpaceship) remove: aCard.
+	test2 := (cardsBeingApplied to: aSpaceship).
 	lastCardPlayed := aCancelCard
 ]
 
@@ -158,16 +160,14 @@ Zathura >> initializeWith: aDiceCup over: aBoard dealing: handsOfCards [
 	lastCardPlayed := CancellationCard new.
 	spaceshipHands := Dictionary new: (aBoard spaceshipPositions size).
 	spaceshipKeys := aBoard spaceshipPositions keys.
-	cardsBeingApplied := Dictionary new:
-		                     aBoard spaceshipPositions size + 1.
-	1 to: aBoard spaceshipPositions size do: [ :spaceship | 
+	1 to: (aBoard spaceshipPositions size) do: [ :spaceship | 
 		spaceshipHands
 			at: (spaceshipKeys at: spaceship)
 			put: (handsOfCards at: spaceship).
-		cardsBeingApplied
-			at: (spaceshipKeys at: spaceship)
-			put: OrderedCollection new ].
-	cardsBeingApplied at: 'General' put: OrderedCollection new
+	].
+
+	cardsBeingApplied := CardsHandler new.
+	cardsBeingApplied manage: spaceshipKeys.
 ]
 
 { #category : #accessing }
