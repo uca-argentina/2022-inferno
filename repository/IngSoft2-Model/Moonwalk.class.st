@@ -24,18 +24,15 @@ Moonwalk class >> createWith: aMoonwalkNumber [
 	^ self new initializeWith: aMoonwalkNumber
 ]
 
+{ #category : #effectApplying }
+Moonwalk >> applyMoonwalkIn: aBoard to: aSpaceship [ 
+	aBoard executeAMoonwalkTo: aSpaceship of: number 
+]
+
 { #category : #applying }
 Moonwalk >> applyTo: aBoard by: aSpaceship [
+	self applyMoonwalkIn: aBoard to: aSpaceship
 
-	| positionBeforeMoonwalk spaceships |
-	spaceships := aBoard spaceshipPositions keys.
-	 spaceships do: [ :eachSpaceship | 
-		(eachSpaceship) == aSpaceship ifFalse: [ 
-			positionBeforeMoonwalk := aBoard positionOf: (eachSpaceship).
-			aBoard
-				move: (eachSpaceship)
-				back: (number*(-1))
-				from: positionBeforeMoonwalk ] ].
 ]
 
 { #category : #initialization }

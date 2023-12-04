@@ -25,8 +25,18 @@ SpeedCard >> checkIfItIsAValidCard [
 	^ true
 ]
 
+{ #category : #creating }
+SpeedCard >> createOwnAction [
+	^ SpeedOrOverloadAction new.
+]
+
+{ #category : #redoer }
+SpeedCard >> createOwnRedoAction [
+	^ RedoSpeedOrOverloadAction new.
+]
+
 { #category : #playing }
-SpeedCard >> effectOnRoll [
+SpeedCard >> effectOnPlay [
 
 	^ 1
 ]
