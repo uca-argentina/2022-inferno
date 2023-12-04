@@ -24,3 +24,13 @@ RepeatCard >> checkIfItIsAValidCard [
 
 	^ true
 ]
+
+{ #category : #creating }
+RepeatCard >> createOwnAction [
+	^ RepeatAction new.
+]
+
+{ #category : #redoer }
+RepeatCard >> createOwnRedoAction [
+	^ RedoRepeatAction new.
+]

@@ -25,8 +25,18 @@ OverloadCard >> checkIfItIsAValidCard [
 	^ true
 ]
 
+{ #category : #creating }
+OverloadCard >> createOwnAction [
+	^ SpeedOrOverloadAction new.
+]
+
+{ #category : #redoer }
+OverloadCard >> createOwnRedoAction [
+	^ RedoSpeedOrOverloadAction new.
+]
+
 { #category : #effect }
-OverloadCard >> effectOnRoll [
+OverloadCard >> effectOnPlay [
 
 	^ -2
 ]

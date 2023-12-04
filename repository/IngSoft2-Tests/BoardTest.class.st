@@ -18,23 +18,30 @@ BoardTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMess
 { #category : #tests }
 BoardTest >> test01ABoardHasAtLeastOneSpot [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot aCardDealer |
 	firstSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { firstSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
-	self assert: aBoard lengthInSpots equals: 1.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	self assert: aBoard lengthInSpots equals: 1
 ]
 
 { #category : #tests }
 BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
@@ -46,7 +53,8 @@ BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	aBoard move: 'SC30 StarFighter' to: 2 and: 2.
 	self
 		assert: (aBoard positionOf: 'SC30 StarFighter') lapNumber
@@ -59,7 +67,10 @@ BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 { #category : #tests }
 BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	error := Error.
@@ -73,7 +84,8 @@ BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	invalidMove := [ aBoard move: 'SC30 StarFighter' to: 2 and: 3 ].
 	self should: invalidMove raise: error withMessage: errorMessage
 ]
@@ -81,7 +93,10 @@ BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 { #category : #tests }
 BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	error := Error.
@@ -95,16 +110,19 @@ BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
-	invalidMove := [ 
-	               aBoard move: 'SC30 StarFighter' to: 1 and: -1 ].
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	invalidMove := [ aBoard move: 'SC30 StarFighter' to: 1 and: -1 ].
 	self should: invalidMove raise: error withMessage: errorMessage
 ]
 
 { #category : #tests }
 BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
@@ -116,7 +134,8 @@ BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	aBoard move: 'SC30 StarFighter' to: 2 and: 2.
 	self assert: aBoard lengthInSpots equals: 2
 ]
@@ -124,7 +143,10 @@ BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 { #category : #tests }
 BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
@@ -136,7 +158,8 @@ BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	aBoard move: 'SC30 StarFighter' to: 2 and: 2.
 	self assert: aBoard lengthInParsecs equals: 10
 ]
@@ -144,7 +167,10 @@ BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 { #category : #tests }
 BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
@@ -156,7 +182,8 @@ BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	aBoard move: 'SC30 StarFighter' to: 2 and: 2.
 	self assert: aBoard amountOfLaps equals: 3
 ]
@@ -164,7 +191,10 @@ BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 { #category : #tests }
 BoardTest >> test08ABoardCanReturnThePositionOfAllTheSpaceships [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
@@ -176,7 +206,8 @@ BoardTest >> test08ABoardCanReturnThePositionOfAllTheSpaceships [
 		          with: aCollectionOfSpots
 		          and: 10
 		          playedFor: 3
-		          by: aCollectionOfSpaceships.
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
 	aBoard move: 'SC30 StarFighter' to: 2 and: 2.
 	self
 		assert: (aBoard spaceshipPositions at: 'SC30 StarFighter') lapNumber

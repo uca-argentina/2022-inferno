@@ -25,3 +25,13 @@ CancellationCard >> checkIfItIsAValidCard [
 
 	^ true
 ]
+
+{ #category : #creating }
+CancellationCard >> createOwnAction [
+	^ CancellationAction new.
+]
+
+{ #category : #redoer }
+CancellationCard >> createOwnRedoAction [
+	^ RedoCancellationAction new.
+]

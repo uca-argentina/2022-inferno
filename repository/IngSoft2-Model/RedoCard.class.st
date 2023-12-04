@@ -24,3 +24,8 @@ RedoCard >> checkIfItIsAValidCard [
 
 	^ true
 ]
+
+{ #category : #creating }
+RedoCard >> createOwnAction [
+	^ RedoAction new.
+]

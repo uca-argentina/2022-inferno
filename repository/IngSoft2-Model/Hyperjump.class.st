@@ -22,31 +22,19 @@ Hyperjump class >> createWith: aJumpsArray [
 	^self new initializeWith: aJumpsArray.
 ]
 
-{ #category : #applying }
-Hyperjump >> applyTo: aBoard by: aSpaceship [
-
-	| positionBeforeJump jumpNumber |
-	positionBeforeJump := aBoard positionOf: aSpaceship.
-	jumpNumber := self getJumpNumberInSpots: aBoard.
-	aBoard
-		move: aSpaceship
-		withoutTriggeringNewEffectsfrom: positionBeforeJump
-		to: jumpNumber
-]
-
 { #category : #getters }
-Hyperjump >> getJumpNumberInSpots: aBoard [
+Hyperjump >> applyHyperJumpIn: aBoard to: aSpaceship [
 
-	| hyperJumpValues parsecsForThisJump lengthInParsecs amountOfSpots parsecsPerSpot amountOfSpotsToJump amountOfParsecsToJump |
+	| hyperJumpValues parsecsForThisJump |
 	hyperJumpValues := jumpsArray.
 	parsecsForThisJump := hyperJumpValues removeFirst.
 	hyperJumpValues addLast: parsecsForThisJump.
-	lengthInParsecs := aBoard lengthInParsecs.
-	amountOfSpots := aBoard lengthInSpots.
-	parsecsPerSpot := lengthInParsecs / amountOfSpots.
-	amountOfParsecsToJump := parsecsForThisJump distancetInParsecs.
-	amountOfSpotsToJump := amountOfParsecsToJump // parsecsPerSpot.
-	^ amountOfSpotsToJump
+	aBoard executeAnHyperJumpTo: aSpaceship of: parsecsForThisJump.
+]
+
+{ #category : #applying }
+Hyperjump >> applyTo: aBoard by: aSpaceship [
+	 self applyHyperJumpIn: aBoard to: aSpaceship.
 ]
 
 { #category : #initialization }

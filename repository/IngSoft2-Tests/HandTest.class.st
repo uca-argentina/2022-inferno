@@ -4,6 +4,17 @@ Class {
 	#category : #'IngSoft2-Tests'
 }
 
+{ #category : #asserting }
+HandTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMessage [
+
+	| errorWasRaised errorMessage |
+	errorBlock
+		on: errorClass
+		do: [ :error | 
+			errorWasRaised := true.
+			errorMessage := error messageText ]
+]
+
 { #category : #tests }
 HandTest >> test01AHandIsInitializedWithTwoCards [
 
@@ -66,10 +77,11 @@ HandTest >> test04AHandCanReturnACardThatIsPresentInThatDeck [
 { #category : #tests }
 HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 
-	| aHand exampleCardOne exampleCardTwo cardToAdd aCollectionOfSpots firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot aCollectionOfSpaceships |
+	| aHand exampleCardOne exampleCardTwo cardToAdd aCollectionOfSpots firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot aCollectionOfSpaceships aCardDealer |
+	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand := Hand containing: { 
+	aHand := Hand containing: {
 			         exampleCardOne.
 			         exampleCardTwo }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -79,7 +91,7 @@ HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: SpeedUp new.
 
-	aCollectionOfSpots := { 
+	aCollectionOfSpots := {
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -87,7 +99,32 @@ HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 		                      fifthSpot.
 		                      sixthSpot }.
 	aCollectionOfSpaceships := { 'testShipOne'. 'testShipTwo' }.
-	cardToAdd := Board with: aCollectionOfSpots and: 100 playedFor: 3 by: aCollectionOfSpaceships.
+	cardToAdd := Board
+		             with: aCollectionOfSpots
+		             and: 100
+		             playedFor: 3
+		             by: aCollectionOfSpaceships
+		             DealtBy: aCardDealer.
 	aHand addPickedCardToHand: cardToAdd.
-	self assert: aHand cardsOnHand equals: 2.
+	self assert: aHand cardsOnHand equals: 2
+]
+
+{ #category : #tests }
+HandTest >> test06PlayingACardNotInTheHandRaisesAnError [
+
+	| aHand testHand exampleCardOne exampleCardTwo typeOfCardToTake testCard invalidMove error errorMsg |
+	testHand := Array new: 2.
+	exampleCardOne := SpeedCard new.
+	exampleCardTwo := SpeedCard  new.
+	testCard := SpeedCard new.
+	testHand at: 1 put: exampleCardOne.
+	testHand at: 2 put: exampleCardTwo.
+	typeOfCardToTake := OverloadCard new.
+	error:= Error.
+	errorMsg :='You cannot play a card you don''t have in your hand.'.
+	aHand := Hand containing: { 
+			         exampleCardOne.
+			         exampleCardTwo }.
+	invalidMove := [ aHand play: typeOfCardToTake  ].
+	self should: invalidMove raise: error withMessage: errorMsg 
 ]

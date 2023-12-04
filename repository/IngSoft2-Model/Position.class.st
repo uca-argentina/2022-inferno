@@ -18,15 +18,16 @@ Position class >> at: aLapNumber on: aSpotNumber [
 ]
 
 { #category : #comparison }
-Position >> > aPosition [ 
+Position >> > aPosition [
 
 	| lapsOfSpaceshipA lapsOfSpaceshipB spotsOfSpaceshipA spotsOfSpaceshipB |
-	
 	lapsOfSpaceshipA := self lapNumber.
-	lapsOfSpaceshipB := aPosition lapNumber .
+	lapsOfSpaceshipB := aPosition lapNumber.
 	spotsOfSpaceshipA := self spotNumber.
 	spotsOfSpaceshipB := aPosition spotNumber.
-	^((lapsOfSpaceshipA > lapsOfSpaceshipB) or: (lapsOfSpaceshipA = lapsOfSpaceshipB and: (spotsOfSpaceshipA > spotsOfSpaceshipB)))
+	^ lapsOfSpaceshipA > lapsOfSpaceshipB or:
+		  (lapsOfSpaceshipA = lapsOfSpaceshipB and:
+			   spotsOfSpaceshipA > spotsOfSpaceshipB)
 ]
 
 { #category : #initialization }
