@@ -17,9 +17,10 @@ Mods class >> spaceshipMods: aSpaceship [
 ]
 
 { #category : #creating }
-Mods >> modFor: aSpaceship [ 
+Mods >> modFor: aSpaceship [
+
 	affected := aSpaceship.
-	cards := OrderedCollection new.
+	cards := OrderedCollection new
 ]
 
 { #category : #getters }

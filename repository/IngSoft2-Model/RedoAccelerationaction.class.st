@@ -8,6 +8,7 @@ Class {
 }
 
 { #category : #applying }
-RedoAccelerationaction >> on: aGameInstance by: aSpaceship to: affected with: aRedoCard [ 
+RedoAccelerationaction >> on: aGameInstance by: aSpaceship to: affected with: aRedoCard [
+
 	aGameInstance redoLastCardPlayedBy: aSpaceship with: aRedoCard
 ]

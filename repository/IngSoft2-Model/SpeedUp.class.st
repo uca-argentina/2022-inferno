@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #effectApplying }
-SpeedUp >> applySpeedUpIn: aBoard to: aSpaceship [ 
+SpeedUp >> applySpeedUpIn: aBoard to: aSpaceship [
+
 	| speedUpNumber |
 	speedUpNumber := 4.
-	aBoard executeASpeedUpTo: aSpaceship of: speedUpNumber .
-	
+	aBoard executeASpeedUpTo: aSpaceship of: speedUpNumber
 ]
 
 { #category : #applying }

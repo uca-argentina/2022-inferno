@@ -8,8 +8,10 @@ Class {
 }
 
 { #category : #applying }
-RedoSpeedOrOverloadAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: aRedoCard [ 
-	aGameInstance redoLastCardPlayedBy: aSpaceship
-			applyTo: aTargetedSpaceship
-			with: aRedoCard.
+RedoSpeedOrOverloadAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: aRedoCard [
+
+	aGameInstance
+		redoLastCardPlayedBy: aSpaceship
+		applyTo: aTargetedSpaceship
+		with: aRedoCard
 ]

@@ -27,10 +27,8 @@ Hand class >> containing: aCollectionOfCards [
 { #category : #playing }
 Hand >> addPickedCardToHand: aCard [
 
-	(aCard respondsTo: #assertThatIsACard)
-		ifTrue: [
-			aCard assertThatIsACard
-				ifTrue: [ deck addLast: aCard ] ].
+	(aCard respondsTo: #assertThatIsACard) ifTrue: [ 
+		aCard assertThatIsACard ifTrue: [ deck addLast: aCard ] ].
 	^ aCard
 ]
 
@@ -58,20 +56,18 @@ Hand >> initializeContaining: aCollectionOfCards [
 
 	deck := OrderedCollection new.
 	deck addAllFirst: aCollectionOfCards.
-	^self 
+	^ self
 ]
 
 { #category : #playing }
 Hand >> play: aCard [
-    ^ deck detect: [ :eachCard |  eachCard = aCard ]
-        ifFound: [ :cardToPlay |
-            deck remove: cardToPlay.
-            self assertCardIsOnHand: cardToPlay.
-            ^ cardToPlay
-        ]
-        ifNone: [
-            self error: 'You cannot play a card you don''t have in your hand.'
-        ].
 
-
+	^ deck
+		  detect: [ :eachCard | eachCard = aCard ]
+		  ifFound: [ :cardToPlay | 
+			  deck remove: cardToPlay.
+			  self assertCardIsOnHand: cardToPlay.
+			  ^ cardToPlay ]
+		  ifNone: [ 
+		  self error: 'You cannot play a card you don''t have in your hand.' ]
 ]

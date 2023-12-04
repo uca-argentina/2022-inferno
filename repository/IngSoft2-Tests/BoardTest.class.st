@@ -23,7 +23,9 @@ BoardTest >> test01ABoardHasAtLeastOneSpot [
 	aCollectionOfSpots := { firstSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 10
@@ -37,10 +39,12 @@ BoardTest >> test01ABoardHasAtLeastOneSpot [
 BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -64,12 +68,14 @@ BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	error := Error.
 	errorMessage := 'Cannot move a spaceship to invalid lap.'.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -88,12 +94,14 @@ BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	error := Error.
 	errorMessage := 'Cannot move a spaceship to an invalid position.'.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -112,10 +120,12 @@ BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -134,10 +144,12 @@ BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -156,10 +168,12 @@ BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
@@ -178,10 +192,12 @@ BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 BoardTest >> test08ABoardCanReturnThePositionOfAllTheSpaceships [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.

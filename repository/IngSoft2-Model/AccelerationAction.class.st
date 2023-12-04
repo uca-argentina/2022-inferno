@@ -8,6 +8,9 @@ Class {
 }
 
 { #category : #applying }
-AccelerationAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: anAccelerationCard [ 
-	aGameInstance currentSpaceshipPlaysCard: anAccelerationCard playedBy: aSpaceship 
+AccelerationAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: anAccelerationCard [
+
+	aGameInstance
+		currentSpaceshipPlaysCard: anAccelerationCard
+		playedBy: aSpaceship
 ]

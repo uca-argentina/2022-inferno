@@ -9,8 +9,10 @@ Class {
 
 { #category : #applying }
 RedoCancellationAction >> on: aGameInstance by: aSpaceship to: affected with: aRedoCard [
-	aGameInstance redoCancelationCard: (affected at: 2)
-			from: (affected at: 1)
-			PlayedBy: aSpaceship
-			with: aRedoCard
+
+	aGameInstance
+		redoCancelationCard: (affected at: 2)
+		from: (affected at: 1)
+		PlayedBy: aSpaceship
+		with: aRedoCard
 ]

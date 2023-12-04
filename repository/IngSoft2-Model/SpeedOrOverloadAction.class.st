@@ -8,10 +8,10 @@ Class {
 }
 
 { #category : #applying }
-SpeedOrOverloadAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: anOverloadCard [ 
-	 
+SpeedOrOverloadAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: anOverloadCard [
+
 	aGameInstance
-			currentSpaceshipPlaysCard: anOverloadCard
-			applyTo: aTargetedSpaceship
-			playedBy: aSpaceship .
+		currentSpaceshipPlaysCard: anOverloadCard
+		applyTo: aTargetedSpaceship
+		playedBy: aSpaceship
 ]

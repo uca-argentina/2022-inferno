@@ -34,7 +34,9 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
 	lengthInParsecs := 100.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: lengthInParsecs
@@ -43,14 +45,14 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 		          DealtBy: aCardDealer.
 	aDie1 := Die with: 7.
 	aDie2 := Die with: 6.
-	aCollectionOfDice := {
+	aCollectionOfDice := { 
 		                     aDie1.
 		                     aDie2 }.
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	aHand1 := aBoard dealer dealInitialCards.
 	aHand2 := aBoard dealer dealInitialCards.
 	aHand3 := aBoard dealer dealInitialCards.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -67,7 +69,9 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedPosition exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -75,7 +79,7 @@ ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: SpeedUp new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -95,16 +99,16 @@ ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -123,7 +127,9 @@ ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -131,7 +137,7 @@ ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -151,16 +157,16 @@ ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -178,7 +184,9 @@ ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -186,7 +194,7 @@ ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -206,16 +214,16 @@ ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -233,7 +241,9 @@ ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -241,7 +251,7 @@ ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: Wormhole new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -261,16 +271,16 @@ ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -288,7 +298,9 @@ ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceshipA firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipB positionOfSpaceshipC exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -296,7 +308,7 @@ ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 	fifthSpot := Spot createWith: AtomicBomb new.
 
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -315,16 +327,16 @@ ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -349,14 +361,16 @@ ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 ZathuraTest >> test07ZathuraCanReturnFinalRankingsInCorrectOrder [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedRanking chequeoRankings exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands firstExpectedPosition secondExpectedPosition thirdExpectedPosition aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
 	fifthSpot := Spot createWith: NoEffect new.
 	sixthSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -376,16 +390,16 @@ ZathuraTest >> test07ZathuraCanReturnFinalRankingsInCorrectOrder [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -420,7 +434,9 @@ ZathuraTest >> test07ZathuraCanReturnFinalRankingsInCorrectOrder [
 ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedPosition seventhSpot error errorMessage invalidTurn exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -432,7 +448,7 @@ ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 	error := Error.
 	errorMessage := 'Cannot move that spaceship as it is not its turn.'.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -453,16 +469,16 @@ ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -480,14 +496,16 @@ ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 ZathuraTest >> test09MoonwalkMovesEveryOtherSpaceshipAnAmountOfSpotsBackwards [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceshipA firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipB positionOfSpaceshipThatTriggeredTheMoonwalk exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
 	fifthSpot := Spot createWith: (Moonwalk createWith: 1).
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -506,16 +524,16 @@ ZathuraTest >> test09MoonwalkMovesEveryOtherSpaceshipAnAmountOfSpotsBackwards [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -543,12 +561,13 @@ ZathuraTest >> test09MoonwalkMovesEveryOtherSpaceshipAnAmountOfSpotsBackwards [
 ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipThatJumps arrayOfJumps exampleCardOne exampleCardTwo aHand1 aHand2 aCollectionOfHands aHand3 aCardDealer |
-	
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			(Lightyear distanceOf: 17).
 			(Parsec distanceOf: 4).
 			(Parsec distanceOf: 6) }.
@@ -558,7 +577,7 @@ ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 	fourthSpot := Spot createWith: NoEffect new.
 	fifthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -577,16 +596,16 @@ ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -604,12 +623,14 @@ ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 ZathuraTest >> test11ZathuraDealsTwoCardsToEachSpaceshipToStart [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot spaceshipCards1 spaceshipCards2 aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -625,13 +646,13 @@ ZathuraTest >> test11ZathuraDealsTwoCardsToEachSpaceshipToStart [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -647,11 +668,13 @@ ZathuraTest >> test11ZathuraDealsTwoCardsToEachSpaceshipToStart [
 ZathuraTest >> test12AssertASpaceshipAppliesOverloadToAnotherOneAndDecreasesItsRollByTwo [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -667,13 +690,13 @@ ZathuraTest >> test12AssertASpaceshipAppliesOverloadToAnotherOneAndDecreasesItsR
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -696,12 +719,14 @@ ZathuraTest >> test12AssertASpaceshipAppliesOverloadToAnotherOneAndDecreasesItsR
 ZathuraTest >> test13AssertASpaceshipAppliesSpeedToAnotherOneAndIncreasesItsRollByOne [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -718,13 +743,13 @@ ZathuraTest >> test13AssertASpaceshipAppliesSpeedToAnotherOneAndIncreasesItsRoll
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -747,12 +772,14 @@ ZathuraTest >> test13AssertASpaceshipAppliesSpeedToAnotherOneAndIncreasesItsRoll
 ZathuraTest >> test14AssertASpaceshipAppliesAccelerationAndIncreasesRollByOneForEveryone [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -769,13 +796,13 @@ ZathuraTest >> test14AssertASpaceshipAppliesAccelerationAndIncreasesRollByOneFor
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -796,12 +823,14 @@ ZathuraTest >> test14AssertASpaceshipAppliesAccelerationAndIncreasesRollByOneFor
 ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay cardToPlay2 aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -818,13 +847,13 @@ ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCar
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := CancellationCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -839,7 +868,7 @@ ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCar
 		by: 'Razor Crest'
 		affecting: 'Millenium Falcon'.
 	cardToPlay2 := CancellationCard new.
-	zathura play: cardToPlay2 by: 'Millenium Falcon' affecting: {
+	zathura play: cardToPlay2 by: 'Millenium Falcon' affecting: { 
 			'Millenium Falcon'.
 			cardToPlay }.
 	zathura playNextTurn.
@@ -852,13 +881,15 @@ ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCar
 ZathuraTest >> test16AssertASpaceshipUsesRepeatCardAndLastTriggeredEffectIsDoneAgainToItself [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -876,13 +907,13 @@ ZathuraTest >> test16AssertASpaceshipUsesRepeatCardAndLastTriggeredEffectIsDoneA
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RepeatCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -906,13 +937,15 @@ ZathuraTest >> test16AssertASpaceshipUsesRepeatCardAndLastTriggeredEffectIsDoneA
 ZathuraTest >> test17AssertASpaceshipRedoesSpeedCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -930,13 +963,13 @@ ZathuraTest >> test17AssertASpaceshipRedoesSpeedCardUsingARedoCard [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := SpeedCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -959,13 +992,15 @@ ZathuraTest >> test17AssertASpaceshipRedoesSpeedCardUsingARedoCard [
 ZathuraTest >> test18AssertASpaceshipRedoesAccelerationCardUsingRedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -983,13 +1018,13 @@ ZathuraTest >> test18AssertASpaceshipRedoesAccelerationCardUsingRedoCard [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := AccelerationCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -1015,13 +1050,15 @@ ZathuraTest >> test18AssertASpaceshipRedoesAccelerationCardUsingRedoCard [
 ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay cardToPlay2 exampleCardThree exampleCardFour cardToPlay3 cardToPlay4 aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1041,13 +1078,13 @@ ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 	exampleCardTwo := AccelerationCard new.
 	exampleCardThree := OverloadCard new.
 	exampleCardFour := CancellationCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardThree }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardFour }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -1064,11 +1101,11 @@ ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 		by: 'Razor Crest'
 		affecting: 'Millenium Falcon'.
 	cardToPlay3 := CancellationCard new.
-	zathura play: cardToPlay3 by: 'Millenium Falcon' affecting: {
+	zathura play: cardToPlay3 by: 'Millenium Falcon' affecting: { 
 			'Millenium Falcon'.
 			cardToPlay2 }.
 	cardToPlay4 := RedoCard new.
-	zathura play: cardToPlay4 by: 'Millenium Falcon' affecting: {
+	zathura play: cardToPlay4 by: 'Millenium Falcon' affecting: { 
 			'General'.
 			cardToPlay }.
 	zathura playNextTurn.
@@ -1084,13 +1121,15 @@ ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 ZathuraTest >> test20AssertASpaceshipRedoesRepeatCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1108,13 +1147,13 @@ ZathuraTest >> test20AssertASpaceshipRedoesRepeatCardUsingARedoCard [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -1141,13 +1180,15 @@ ZathuraTest >> test20AssertASpaceshipRedoesRepeatCardUsingARedoCard [
 ZathuraTest >> test21SpaceshipCanAskWhatCardsItHasInHand [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot spaceshipHand aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: SpeedUp new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1165,13 +1206,13 @@ ZathuraTest >> test21SpaceshipCanAskWhatCardsItHasInHand [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -1191,14 +1232,16 @@ ZathuraTest >> test22CardPickerDealsARandomCardToTheTriggeringSpaceship [
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
 		                      fourthdSpot.
 		                      fifthdSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 10
@@ -1210,14 +1253,14 @@ ZathuraTest >> test22CardPickerDealsARandomCardToTheTriggeringSpaceship [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
 
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura
@@ -1233,7 +1276,9 @@ ZathuraTest >> test22CardPickerDealsARandomCardToTheTriggeringSpaceship [
 ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands cardToUse aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
@@ -1241,7 +1286,7 @@ ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 	error := Error.
 	errorMessage := 'Cannot use permanent card if it is not this spaceships  turn.'.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1259,16 +1304,16 @@ ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := RepeatCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1277,7 +1322,7 @@ ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 		           over: aBoard
 		           dealing: aCollectionOfHands.
 	cardToUse := AccelerationCard new.
-	invalidCardUse := [
+	invalidCardUse := [ 
 	                  zathura
 		                  currentSpaceshipPlaysCard: cardToUse
 		                  playedBy: 'Millenium Falcon' ].
@@ -1296,10 +1341,10 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 	aRedoCard := RedoCard new.
 	error := Error.
 	errorMessage := 'Cannot use redo card on a permanent if it is not this spaceships  turn.'.
-	aCardDealer := Dealer ofTypes: {
+	aCardDealer := Dealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1317,16 +1362,16 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := RedoCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1338,7 +1383,7 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 	zathura
 		currentSpaceshipPlaysCard: cardToUse
 		playedBy: 'SC30 StarFighter'.
-	invalidCardUse := [
+	invalidCardUse := [ 
 	                  zathura
 		                  redoLastCardPlayedBy: 'Millenium Falcon'
 		                  with: aRedoCard ].
@@ -1357,14 +1402,14 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 	error := Error.
 	errorMessage := 'Cannot use redo card if nobody has played a card yet'.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
 		                      fourthSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: {
+	aCardDealer := Dealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
@@ -1378,16 +1423,16 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := RedoCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1396,7 +1441,7 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 		           over: aBoard
 		           dealing: aCollectionOfHands.
 	aRedoCard := RedoCard new.
-	invalidCardUse := [
+	invalidCardUse := [ 
 	                  zathura
 		                  redoLastCardPlayedBy: 'Millenium Falcon'
 		                  with: aRedoCard ].
@@ -1415,14 +1460,16 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 	error := Error.
 	errorMessage := 'Cannot use a card that is not present in that spaceships hand'.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
 		                      fourthSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 10
@@ -1434,16 +1481,16 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := RedoCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1451,7 +1498,7 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 		           playWith: aDiceCup
 		           over: aBoard
 		           dealing: aCollectionOfHands.
-	invalidCardUse := [
+	invalidCardUse := [ 
 	                  zathura
 		                  play: CancellationCard new
 		                  by: 'Millenium Falcon'
@@ -1463,13 +1510,15 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1487,16 +1536,16 @@ ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := AccelerationCard new.
 	exampleCardTwo := CancellationCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1512,7 +1561,7 @@ ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 	zathura
 		play: CancellationCard new
 		by: 'Millenium Falcon'
-		affecting: {
+		affecting: { 
 				'General'.
 				exampleCardOne }.
 	self
@@ -1528,13 +1577,15 @@ ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1552,16 +1603,16 @@ ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := OverloadCard new.
 	exampleCardTwo := CancellationCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1577,7 +1628,7 @@ ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 	zathura
 		play: CancellationCard new
 		by: 'Millenium Falcon'
-		affecting: {
+		affecting: { 
 				'Millenium Falcon'.
 				exampleCardOne }.
 	self
@@ -1593,13 +1644,15 @@ ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthSpot := Spot createWith: NoEffect new.
 
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1617,16 +1670,16 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := CancellationCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aHand3 := Hand containing: {
+	aHand3 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2.
 		                      aHand3 }.
@@ -1642,7 +1695,7 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 	zathura
 		play: CancellationCard new
 		by: 'Millenium Falcon'
-		affecting: {
+		affecting: { 
 				'SC30 StarFighter'.
 				exampleCardOne }.
 	self
@@ -1658,13 +1711,15 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 ZathuraTest >> test30AssertASpaceshipRedoesOverloadCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
 	fourthdSpot := Spot createWith: NoEffect new.
 	fifthdSpot := Spot createWith: NoEffect new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot.
@@ -1682,13 +1737,13 @@ ZathuraTest >> test30AssertASpaceshipRedoesOverloadCardUsingARedoCard [
 	aDiceCup := DiceCup with: aCollectionOfDice.
 	exampleCardOne := RedoCard new.
 	exampleCardTwo := OverloadCard new.
-	aHand1 := Hand containing: {
+	aHand1 := Hand containing: { 
 			          exampleCardOne.
 			          exampleCardTwo }.
-	aHand2 := Hand containing: {
+	aHand2 := Hand containing: { 
 			          exampleCardTwo.
 			          exampleCardOne }.
-	aCollectionOfHands := {
+	aCollectionOfHands := { 
 		                      aHand1.
 		                      aHand2 }.
 	zathura := Zathura

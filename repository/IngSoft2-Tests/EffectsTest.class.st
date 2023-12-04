@@ -11,8 +11,10 @@ EffectsTest >> test01NoEffectDoesNothingToAnySpaceship [
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
-	aCollectionOfSpots := {
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -42,8 +44,10 @@ EffectsTest >> test02SpeedUpMovesSpaceship4SpotsForward [
 	firstSpot := Spot createWith: SpeedUp new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: NoEffect new.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
-	aCollectionOfSpots := {
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -73,8 +77,10 @@ EffectsTest >> test03WormholeMovesSpaceship4SpotsBackwards [
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: Wormhole new.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
-	aCollectionOfSpots := {
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -104,8 +110,10 @@ EffectsTest >> test04AtomicBombPutsEverySpaceshipInSpotZeroAndCurrentLap [
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: AtomicBomb new.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
-	aCollectionOfSpots := {
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -149,8 +157,10 @@ EffectsTest >> test05MoonwalkMovesEveryOtherSpaceshipNSpotsBackwards [
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: (Moonwalk createWith: 10).
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
-	aCollectionOfSpots := {
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -196,13 +206,15 @@ EffectsTest >> test06CardPickerSpotReturnsATypeOfCard [
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	thirdSpot := Spot createWith: CardPicker new.
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: 9
@@ -218,19 +230,21 @@ EffectsTest >> test06CardPickerSpotReturnsATypeOfCard [
 EffectsTest >> test07HyperJumpSpotIsTriggeredBySpaceshipAndMovesIt3Parsecs [
 
 	| firstSpot secondSpot aDistance1 aDistance2 aDistance3 arrayOfJumps thirdSpot aCollectionOfSpots aCollectionOfSpaceships aBoard expectedPositionAfterFirstJump aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aDistance1 := Parsec distanceOf: 1.
 	aDistance2 := Parsec distanceOf: 2.
 	aDistance3 := Parsec distanceOf: 3.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			aDistance1.
 			aDistance2.
 			aDistance3 }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -257,19 +271,21 @@ EffectsTest >> test07HyperJumpSpotIsTriggeredBySpaceshipAndMovesIt3Parsecs [
 EffectsTest >> test08HyperJumpSpotIsCreatedWithParsecsAndLightyearsAndIsTriggeredBySpaceshipAndMovesIt [
 
 	| firstSpot secondSpot aDistance1 aDistance2 aDistance3 arrayOfJumps thirdSpot aCollectionOfSpots aCollectionOfSpaceships aBoard expectedPositionAfterFirstJump expectedPositionAfterSecondJump aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aDistance1 := Parsec distanceOf: 1.
 	aDistance2 := Parsec distanceOf: 3.
 	aDistance3 := Lightyear distanceOf: 5.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			aDistance1.
 			aDistance2.
 			aDistance3 }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -301,16 +317,18 @@ EffectsTest >> test08HyperJumpSpotIsCreatedWithParsecsAndLightyearsAndIsTriggere
 EffectsTest >> test09HyperJumpSpotIsTriggeredBySpaceshipAndMovesIt9Lightyears [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot thirdSpot expectedPositionAfterFirstJump arrayOfJumps aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			(Lightyear distanceOf: 9).
 			(Parsec distanceOf: 2).
 			(Parsec distanceOf: 1) }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -337,16 +355,18 @@ EffectsTest >> test09HyperJumpSpotIsTriggeredBySpaceshipAndMovesIt9Lightyears [
 EffectsTest >> test10HyperJumpMovesTriggeringSpaceshipTwiceOneExpresedInLightyearsAndTheSecondOneInParsecs [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot thirdSpot expectedPositionAfterFirstJump arrayOfJumps aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			(Lightyear distanceOf: 10).
 			(Parsec distanceOf: 3).
 			(Parsec distanceOf: 1) }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -382,19 +402,21 @@ EffectsTest >> test10HyperJumpMovesTriggeringSpaceshipTwiceOneExpresedInLightyea
 EffectsTest >> test11IfJumpsDistanceIsSmallerThanParsecsPerSpotSpaceshipIsNotMoved [
 
 	| firstSpot secondSpot aDistance1 aDistance2 aDistance3 arrayOfJumps thirdSpot aCollectionOfSpots aCollectionOfSpaceships aBoard expectedPositionAfterFirstJump expectedPositionAfterSecondJump aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aDistance1 := Parsec distanceOf: 1.
 	aDistance2 := Parsec distanceOf: 2.
 	aDistance3 := Parsec distanceOf: 3.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			aDistance1.
 			aDistance2.
 			aDistance3 }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -425,19 +447,21 @@ EffectsTest >> test11IfJumpsDistanceIsSmallerThanParsecsPerSpotSpaceshipIsNotMov
 EffectsTest >> test12AfterUsedAllHyperJumpsStartsFromFirstOneAgain [
 
 	| firstSpot secondSpot aDistance1 aDistance2 aDistance3 arrayOfJumps thirdSpot aCollectionOfSpots aCollectionOfSpaceships aBoard expectedPositionAfterFirstJump expectedPositionAfterSecondJump expectedPositionAfterThirdJump expectedPositionAfterFourthJump aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	aDistance1 := Parsec distanceOf: 1.
 	aDistance2 := Parsec distanceOf: 2.
 	aDistance3 := Parsec distanceOf: 3.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			aDistance1.
 			aDistance2.
 			aDistance3 }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.
@@ -475,16 +499,18 @@ EffectsTest >> test12AfterUsedAllHyperJumpsStartsFromFirstOneAgain [
 EffectsTest >> test13IfJumpsDistanceHasDecimalPartItOnlyJumpsTheIntegerPart [
 
 	| firstSpot secondSpot arrayOfJumps thirdSpot aCollectionOfSpots aCollectionOfSpaceships aBoard expectedPositionAfterFirstJump expectedPositionAfterSecondJump aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := Dealer ofTypes: { 
+			               SpeedCard new.
+			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
 	secondSpot := Spot createWith: NoEffect new.
 	arrayOfJumps := OrderedCollection new: 3.
-	arrayOfJumps addAllFirst: {
+	arrayOfJumps addAllFirst: { 
 			(Parsec distanceOf: 4).
 			(Parsec distanceOf: 2).
 			(Parsec distanceOf: 1) }.
 	thirdSpot := Spot createWith: (Hyperjump createWith: arrayOfJumps).
-	aCollectionOfSpots := {
+	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
 		                      thirdSpot }.

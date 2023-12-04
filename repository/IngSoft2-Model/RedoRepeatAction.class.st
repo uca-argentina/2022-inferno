@@ -8,8 +8,10 @@ Class {
 }
 
 { #category : #applying }
-RedoRepeatAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: aRedoCard [ 
-	aGameInstance redoRepeatCardPlayedBy: aSpaceship
-			applyTo: aTargetedSpaceship
-			with: aRedoCard
+RedoRepeatAction >> on: aGameInstance by: aSpaceship to: aTargetedSpaceship with: aRedoCard [
+
+	aGameInstance
+		redoRepeatCardPlayedBy: aSpaceship
+		applyTo: aTargetedSpaceship
+		with: aRedoCard
 ]

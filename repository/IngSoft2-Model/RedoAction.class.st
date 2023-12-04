@@ -8,10 +8,14 @@ Class {
 }
 
 { #category : #applying }
-RedoAction >> on: aGameInstance by: aSpaceship to: affected with: aRedoCard [ 
+RedoAction >> on: aGameInstance by: aSpaceship to: affected with: aRedoCard [
+
 	| lastCardPlayed actionRedo |
 	lastCardPlayed := aGameInstance lastCardPlayed.
 	actionRedo := lastCardPlayed createOwnRedoAction.
-	actionRedo on: aGameInstance by: aSpaceship to: affected with: aRedoCard.
-	
+	actionRedo
+		on: aGameInstance
+		by: aSpaceship
+		to: affected
+		with: aRedoCard
 ]

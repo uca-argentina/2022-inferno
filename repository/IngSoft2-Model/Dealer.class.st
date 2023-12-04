@@ -38,8 +38,9 @@ Dealer >> dealInitialCards [
 	| randomcard1 randomcard2 |
 	randomcard1 := self dealOne.
 	randomcard2 := self dealOne.
-	^ Hand containing: {randomcard1. randomcard2}.
-
+	^ Hand containing: { 
+			  randomcard1.
+			  randomcard2 }
 ]
 
 { #category : #dealing }
@@ -52,5 +53,6 @@ Dealer >> dealOne [
 
 { #category : #initialization }
 Dealer >> initializeWith: aCollectionOfTypes [
-	typesOfCards := aCollectionOfTypes.
+
+	typesOfCards := aCollectionOfTypes
 ]
