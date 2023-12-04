@@ -10,7 +10,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #handlers }
 CardsHandler >> manage: aCollection [ 
 	activeMods := OrderedCollection new.
 	1 to: (aCollection size + 1) do: [:spaceship |
@@ -23,7 +23,7 @@ CardsHandler >> manage: aCollection [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #handlers }
 CardsHandler >> modsAffecting: aSpaceship [ 
  | test test2 |
 	activeMods do: [:mod |

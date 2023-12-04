@@ -16,18 +16,18 @@ Mods class >> spaceshipMods: aSpaceship [
 	^self new modFor: aSpaceship.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creating }
 Mods >> modFor: aSpaceship [ 
 	affected := aSpaceship.
 	cards := OrderedCollection new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #getters }
 Mods >> modsOnSpaceship [
 	^ cards.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #getters }
 Mods >> spaceshipAffected [
 	^ affected.
 ]
