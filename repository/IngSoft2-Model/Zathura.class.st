@@ -77,12 +77,9 @@ Zathura >> assertSpaceshipCanPlayCard: aSpaceship [
 { #category : #cardApplying }
 Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: aCancelCard [
 
-	| test1 test2 |
 	self assert: aCard isBeingAppliedTo: aSpaceship.
 	(spaceshipHands at: anotherSpaceship) play: aCancelCard.
-	test1 := cardsBeingApplied to: aSpaceship.
 	(cardsBeingApplied to: aSpaceship) remove: aCard.
-	test2 := cardsBeingApplied to: aSpaceship.
 	lastCardPlayed := aCancelCard
 ]
 
