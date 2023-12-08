@@ -4,6 +4,9 @@ i represent a type of card: overload
 Class {
 	#name : #OverloadCard,
 	#superclass : #Object,
+	#instVars : [
+		'effect'
+	],
 	#category : #'IngSoft2-Model'
 }
 
@@ -17,6 +20,11 @@ OverloadCard >> = aCard [
 OverloadCard >> assertThatIsACard [
 
 	^ self checkIfItIsAValidCard
+]
+
+{ #category : #boosting }
+OverloadCard >> boost [
+	effect:= effect * 2.
 ]
 
 { #category : #assertions }
@@ -38,5 +46,10 @@ OverloadCard >> createOwnRedoAction [
 { #category : #effect }
 OverloadCard >> effectOnPlay [
 
-	^ -2
+	^ effect.
+]
+
+{ #category : #effect }
+OverloadCard >> initialize [
+	effect := -2.
 ]

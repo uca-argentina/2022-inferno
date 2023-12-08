@@ -4,6 +4,9 @@ i represent a type of card: acceleration
 Class {
 	#name : #AccelerationCard,
 	#superclass : #Object,
+	#instVars : [
+		'effect'
+	],
 	#category : #'IngSoft2-Model'
 }
 
@@ -17,6 +20,11 @@ AccelerationCard >> = aCard [
 AccelerationCard >> assertThatIsACard [
 
 	^ self checkIfItIsAValidCard
+]
+
+{ #category : #boosting }
+AccelerationCard >> boost [
+	effect := effect *2.
 ]
 
 { #category : #assertions }
@@ -38,5 +46,10 @@ AccelerationCard >> createOwnRedoAction [
 { #category : #assertions }
 AccelerationCard >> effectOnPlay [
 
-	^ 1
+	^ effect.
+]
+
+{ #category : #assertions }
+AccelerationCard >> initialize [ 
+	effect:= 1.
 ]

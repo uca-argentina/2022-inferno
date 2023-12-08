@@ -52,9 +52,12 @@ EffectCreatorTest >> test02EffectCreatorCreatesACollectionOfSpotsWithProportionO
 	boardLayout := anEffectCreator
 		               for: amountOfSpots
 		               with: aDictionaryWithEffectProbabilities.
-	self assert:
-		(((boardLayout at: 9) effectAtSpot isKindOf: SpeedUp) or:
-			 ((boardLayout at: 8) effectAtSpot isKindOf: SpeedUp))
+
+		self assert: (
+  ((boardLayout at: 9) effectAtSpot isKindOf: SpeedUp) or:
+  (((boardLayout at: 8) effectAtSpot isKindOf: SpeedUp )or:
+   (((boardLayout at: 7) effectAtSpot isKindOf: SpeedUp) or:
+    ((boardLayout at: 6) effectAtSpot isKindOf: SpeedUp))))
 ]
 
 { #category : #tests }

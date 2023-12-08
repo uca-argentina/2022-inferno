@@ -129,3 +129,71 @@ CardsTest >> test15RedoCardCanRespondToAssertionMessage [
 	aTestCard := RedoCard new.
 	self assert: aTestCard assertThatIsACard
 ]
+
+{ #category : #tests }
+CardsTest >> test16SpeedBostCardEqualsAnotherInstanceOfSameCard [
+
+	| aTestCard aCard |
+	aTestCard := SpeedBoostCard new.
+	aCard := SpeedBoostCard new.
+	self assert: aTestCard equals: aCard.
+]
+
+{ #category : #tests }
+CardsTest >> test17SpeedBostCardCanRespondToAssertionMessage [
+
+	| aTestCard |
+	aTestCard := SpeedBoostCard new.
+	self assert: aTestCard assertThatIsACard.
+]
+
+{ #category : #tests }
+CardsTest >> test18SpeedCardIsCreatedWithADefaultEffectValue [
+
+	| aTestCard |
+	aTestCard := SpeedCard new.
+	self assert: aTestCard effectOnPlay equals: 1.
+]
+
+{ #category : #tests }
+CardsTest >> test19OverloadCardIsCreatedWithADefaultEffectValue [
+
+	| aTestCard |
+	aTestCard := OverloadCard new.
+	self assert: aTestCard effectOnPlay equals: -2.
+]
+
+{ #category : #tests }
+CardsTest >> test20SpeedCardCanBeBoostedDuplicatingItsEffect [
+
+	| aTestCard |
+	aTestCard := SpeedCard new.
+	aTestCard boost.
+	self assert: aTestCard effectOnPlay equals: 2.
+]
+
+{ #category : #tests }
+CardsTest >> test21OverloadCardCanBeBoostedDuplicatingItsEffect [
+
+	| aTestCard |
+	aTestCard := OverloadCard new.
+	aTestCard boost.
+	self assert: aTestCard effectOnPlay equals: -4.
+]
+
+{ #category : #tests }
+CardsTest >> test22AccelerationCardCanBeCreatedWithADefaultValue [
+
+	| aTestCard |
+	aTestCard := AccelerationCard new.
+	self assert: aTestCard effectOnPlay equals: 1.
+]
+
+{ #category : #tests }
+CardsTest >> test23AccelerationCardCanBeBoostedDuplicatingItsEffect [
+
+	| aTestCard |
+	aTestCard := AccelerationCard new.
+	aTestCard boost.
+	self assert: aTestCard effectOnPlay equals: 2.
+]

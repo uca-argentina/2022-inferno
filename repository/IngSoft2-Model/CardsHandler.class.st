@@ -24,16 +24,13 @@ CardsHandler >> manage: aCollection [
 { #category : #handlers }
 CardsHandler >> modsAffecting: aSpaceship [
 
-	| test test2 |
 	activeMods do: [ :mod | 
-		test := mod spaceshipAffected.
 		mod spaceshipAffected = aSpaceship ifTrue: [ 
-			test2 := mod modsOnSpaceship.
 			^ mod modsOnSpaceship ] ]
 ]
 
 { #category : #accessing }
 CardsHandler >> to: aSpaceship [
 
-	^ self modsAffecting: aSpaceship
+	^ (self modsAffecting: aSpaceship)
 ]
