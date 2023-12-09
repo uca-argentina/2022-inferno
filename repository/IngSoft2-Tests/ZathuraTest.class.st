@@ -21,12 +21,12 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 	| aCollectionOfSpaceships aBoard aCollectionOfSpots anEffectCreator lengthInParsecs aDiceCup aCollectionOfDice zathura aDie1 aDie2 aHand1 aHand2 aHand3 aCollectionOfHands aDictionaryWithEffectProbabilities aCardDealer |
 	anEffectCreator := EffectCreator new.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 20.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: SpeedUp put: 20.
+	aDictionaryWithEffectProbabilities at: Wormhole put: 20.
+	aDictionaryWithEffectProbabilities at: AtomicBomb put: 2.
+	aDictionaryWithEffectProbabilities at: Moonwalk put: 10.
+	aDictionaryWithEffectProbabilities at: Hyperjump put: 8.
+	aDictionaryWithEffectProbabilities at: CardPicker put: 10.
 	aCollectionOfSpots := anEffectCreator
 		                      for: 1000
 		                      with: aDictionaryWithEffectProbabilities.
@@ -2277,17 +2277,17 @@ ZathuraTest >> test39AssertASpaceshipCannotPlayAnAccelerationCardOnSpecificShip 
 ]
 
 { #category : #tests }
-ZathuraTest >> test40AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRandomlyGeneratedBoardLayoutDiesAndFiniteDeck [
+ZathuraTest >> test40AGameOfZathuraInfernoWithAFiniteDeckRunsOutOfCardsIfNeverPlayed [
 
-	| aCollectionOfSpaceships aBoard aCollectionOfSpots anEffectCreator lengthInParsecs aDiceCup aCollectionOfDice zathura aDie1 aDie2 aHand1 aHand2 aHand3 aCollectionOfHands aDictionaryWithEffectProbabilities aCardDealer aDeckCreator aDictionaryWithCardsAndItsProbabilities |
+	| aCollectionOfSpaceships aBoard aCollectionOfSpots anEffectCreator lengthInParsecs aDiceCup aCollectionOfDice zathura aDie1 aDie2 aHand1 aHand2 aHand3 aCollectionOfHands aDictionaryWithEffectProbabilities aCardDealer aDeckCreator aDictionaryWithCardsAndItsProbabilities errorBlock errorMessage error |
 	anEffectCreator := EffectCreator new.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 20.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: SpeedUp put: 20.
+	aDictionaryWithEffectProbabilities at: Wormhole put: 20.
+	aDictionaryWithEffectProbabilities at: AtomicBomb put: 2.
+	aDictionaryWithEffectProbabilities at: Moonwalk put: 10.
+	aDictionaryWithEffectProbabilities at: Hyperjump put: 8.
+	aDictionaryWithEffectProbabilities at: CardPicker put: 10.
 	aCollectionOfSpots := anEffectCreator
 		                      for: 1000
 		                      with: aDictionaryWithEffectProbabilities.
@@ -2333,12 +2333,14 @@ ZathuraTest >> test40AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 		           playWith: aDiceCup
 		           over: aBoard
 		           dealing: aCollectionOfHands.
-	[ zathura hasGameFinished ] whileFalse: [ zathura playNextTurn ].
-	self assert: zathura hasGameFinished
+	errorBlock := [[ zathura hasGameFinished ] whileFalse: [ zathura playNextTurn ]].
+	errorMessage:= 'Cannot pull a card as the deck is empty'.
+	error:= Error.
+	self should:  errorBlock raise: error  withMessage: errorMessage.
 ]
 
 { #category : #tests }
-ZathuraTest >> test41PlayingAnOverloadCardSendsItToTheDiscardDeck [
+ZathuraTest >> test41PlayingAnOverloadCardWithOutCancellingDoesNotSendsItToTheDiscardDeck [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
 	aDeckCreator := FiniteDealer new.
@@ -2395,5 +2397,384 @@ ZathuraTest >> test41PlayingAnOverloadCardSendsItToTheDiscardDeck [
 	cardToPlay := OverloadCard new.
 	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
 	
-	self assert:( (aBoard dealer) amountOfDiscarded )equals: 1
+	self assert:( (aBoard dealer) amountOfDiscarded )equals: 0.
+]
+
+{ #category : #tests }
+ZathuraTest >> test42PlayingAnOverloadCardAndThenCancellingSendsThoseTwoToDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := CancellationCard new.
+	exampleCardTwo := OverloadCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := CancellationCard new.
+		zathura
+		play: CancellationCard new
+		by: 'Razor Crest'
+		affecting: { 
+				'Razor Crest'.
+				exampleCardTwo }.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded )equals: 2.
+]
+
+{ #category : #tests }
+ZathuraTest >> test43PlayingASpeedCardAndThenCancellingSendsThoseTwoToDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := CancellationCard new.
+	exampleCardTwo := SpeedCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := SpeedCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := CancellationCard new.
+		zathura
+		play: CancellationCard new
+		by: 'Razor Crest'
+		affecting: { 
+				'Razor Crest'.
+				exampleCardTwo }.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 2.
+]
+
+{ #category : #tests }
+ZathuraTest >> test44PlayingASpeedBoostCardSendsJustOneToDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := OverloadCard new.
+	exampleCardTwo := SpeedBoostCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := SpeedBoostCard new.
+	zathura play: cardToPlay 
+	by: 'Razor Crest' 
+	affecting: {'Razor Crest'.
+					exampleCardOne}.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 1.
+]
+
+{ #category : #tests }
+ZathuraTest >> test45PlayingARedoCardSendsJustOneToDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := OverloadCard new.
+	exampleCardTwo := RedoCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+		
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := RedoCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 1.
+]
+
+{ #category : #tests }
+ZathuraTest >> test46PlayingARepeatCardSendsJustOneToDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: SpeedUp new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := OverloadCard new.
+	exampleCardTwo := RepeatCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+		
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	cardToPlay := RepeatCard new.
+	zathura
+		play: cardToPlay
+		by: 'Razor Crest'
+		affecting: 'Razor Crest'.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 1.
+]
+
+{ #category : #tests }
+ZathuraTest >> test47WhenRanOutOfCardsTheDeckRenovatesItselfFromTheDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 100.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 4
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: CardPicker new.
+	secondSpot := Spot createWith: SpeedUp new.
+	thirdSpot := Spot createWith: CardPicker new.
+	fourthdSpot := Spot createWith: CardPicker new.
+	fifthdSpot := Spot createWith: CardPicker new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 5
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := RepeatCard  new.
+	exampleCardTwo := RepeatCard  new.
+	aHand1 := aCardDealer dealInitialCards .
+	aHand2 := aCardDealer dealInitialCards .
+	self assert: ((aBoard dealer) amountOfCardsInDeck ) equals: 0.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	zathura playNextTurn. "Razor Crest pisa el speedup"
+	zathura playNextTurn. "Millenium falcon pisa el speedup"
+		
+	cardToPlay := RepeatCard  new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'. "se juega y se descarta"
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'. "se juega y se descarta"
+	zathura playNextTurn. "razor crest intenta sacar carta"
+	self assert:( (aBoard dealer) amountOfCardsInDeck ) equals: 1.
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 0.
+	
 ]

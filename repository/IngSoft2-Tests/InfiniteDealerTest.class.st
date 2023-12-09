@@ -1,11 +1,11 @@
 Class {
-	#name : #DealerTest,
+	#name : #InfiniteDealerTest,
 	#superclass : #TestCase,
 	#category : #'IngSoft2-Tests'
 }
 
 { #category : #asserting }
-DealerTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMessage [
+InfiniteDealerTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMessage [
 
 	| errorWasRaised errorMessage |
 	errorBlock
@@ -16,7 +16,7 @@ DealerTest >> should: errorBlock raise: errorClass withMessage: expectedErrorMes
 ]
 
 { #category : #asserting }
-DealerTest >> test01ADealerCanBeCreatedWithAtLeastOneTypeOfCard [
+InfiniteDealerTest >> test01ADealerCanBeCreatedWithAtLeastOneTypeOfCard [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. }.
@@ -25,7 +25,7 @@ DealerTest >> test01ADealerCanBeCreatedWithAtLeastOneTypeOfCard [
 ]
 
 { #category : #asserting }
-DealerTest >> test02ADealerCannotBeCreatedWithAnEmptyArrayOfTypes [
+InfiniteDealerTest >> test02ADealerCannotBeCreatedWithAnEmptyArrayOfTypes [
 
 	| aCollectionOfTypes cardDealer error errorMessage |
 	aCollectionOfTypes := { SpeedCard new. }.
@@ -36,7 +36,7 @@ DealerTest >> test02ADealerCannotBeCreatedWithAnEmptyArrayOfTypes [
 ]
 
 { #category : #asserting }
-DealerTest >> test03ADealerCannotBeCreatedWithAnArrayThatContainsAnythingButCards [
+InfiniteDealerTest >> test03ADealerCannotBeCreatedWithAnArrayThatContainsAnythingButCards [
 
 	| aCollectionOfTypes cardDealer error errorMessage |
 	aCollectionOfTypes := { SpeedCard new. Die new. }.
@@ -47,7 +47,7 @@ DealerTest >> test03ADealerCannotBeCreatedWithAnArrayThatContainsAnythingButCard
 ]
 
 { #category : #asserting }
-DealerTest >> test04ADealerReturnsARandomCardIfIntializedWithSeveralTypes [
+InfiniteDealerTest >> test04ADealerReturnsARandomCardIfIntializedWithSeveralTypes [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. OverloadCard  new. }.
@@ -57,7 +57,7 @@ DealerTest >> test04ADealerReturnsARandomCardIfIntializedWithSeveralTypes [
 ]
 
 { #category : #asserting }
-DealerTest >> test05ADealerReturnsTwoCardsIfAskedToDealInitialHand [
+InfiniteDealerTest >> test05ADealerReturnsTwoCardsIfAskedToDealInitialHand [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. OverloadCard  new. }.

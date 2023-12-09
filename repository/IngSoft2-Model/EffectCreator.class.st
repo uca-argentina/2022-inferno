@@ -25,6 +25,15 @@ EffectCreator >> assertAmountOfSpotsIsMoreThanZero: anAmountOfSpots [
 		Error signal: 'Cannot create a layout with size zero or lower.' ]
 ]
 
+{ #category : #layoutCreation }
+EffectCreator >> assertCorrectProbabilities: aDictionaryWithEffectsAndItsProbabilities [
+
+	(aDictionaryWithEffectsAndItsProbabilities values anySatisfy: [ :prob |
+		 prob < 0 or: [ prob > 100 ] ]) ifTrue: [
+		self error:
+			'Invalid probabilities. Probabilities must be between 0 and 100.' ]
+]
+
 { #category : #assertions }
 EffectCreator >> assertEffectProbabilityIsPositive: eachProbability [
 
@@ -42,55 +51,36 @@ EffectCreator >> assertSumOfProbabilitiesIsOneHundredOrLess: sumOfProbabilities 
 { #category : #layoutCreation }
 EffectCreator >> createLayoutFor: anAmountOfSpots using: aDictionaryWithEffectsAndItsProbabilities [
 
-	| boardLayout atomicBombTopLimit hyperjumpTopLimit moonwalkTopLimit speedUpTopLimit wormholeTopLimit cardPickerTopLimit noEffectTopLimit randomNumber |
-	boardLayout := Array new: anAmountOfSpots.
-	atomicBombTopLimit := aDictionaryWithEffectsAndItsProbabilities at:
-		                      'AtomicBomb'.
-	hyperjumpTopLimit := (aDictionaryWithEffectsAndItsProbabilities at:
-		                      'Hyperjump') + atomicBombTopLimit.
-	moonwalkTopLimit := (aDictionaryWithEffectsAndItsProbabilities at:
-		                     'Moonwalk') + hyperjumpTopLimit.
-	speedUpTopLimit := (aDictionaryWithEffectsAndItsProbabilities at:
-		                    'SpeedUp') + moonwalkTopLimit.
-	wormholeTopLimit := (aDictionaryWithEffectsAndItsProbabilities at:
-		                     'Wormhole') + speedUpTopLimit.
-	cardPickerTopLimit := (aDictionaryWithEffectsAndItsProbabilities at:
-		                       'CardPicker') + wormholeTopLimit.
-	noEffectTopLimit := 100.
-	1 to: anAmountOfSpots do: [ :eachSpotNumber | 
-		randomNumber := 100 atRandom.
-		randomNumber <= atomicBombTopLimit ifTrue: [ 
-			boardLayout
-				at: eachSpotNumber
-				put: (Spot createWith: AtomicBomb new) ].
-		(randomNumber > atomicBombTopLimit and:
-			 randomNumber <= hyperjumpTopLimit) ifTrue: [ 
-			boardLayout
-				at: eachSpotNumber
-				put:
-				(Spot createWith: (Hyperjump createWith: self arrayOfJumpsCreator)) ].
-		(randomNumber > hyperjumpTopLimit and:
-			 randomNumber <= moonwalkTopLimit) ifTrue: [ 
-			boardLayout
-				at: eachSpotNumber
-				put:
-				(Spot createWith:
-					 (Moonwalk createWith: self moonwalkNumberCreator)) ].
-		(randomNumber > moonwalkTopLimit and:
-			 randomNumber <= speedUpTopLimit) ifTrue: [ 
-			boardLayout at: eachSpotNumber put: (Spot createWith: SpeedUp new) ].
-		(randomNumber > speedUpTopLimit and:
-			 randomNumber <= wormholeTopLimit) ifTrue: [ 
-			boardLayout at: eachSpotNumber put: (Spot createWith: Wormhole new) ].
-		(randomNumber > wormholeTopLimit and:
-			 randomNumber <= cardPickerTopLimit) ifTrue: [ 
-			boardLayout
-				at: eachSpotNumber
-				put: (Spot createWith: CardPicker new) ].
-		(randomNumber > cardPickerTopLimit and:
-			 randomNumber <= noEffectTopLimit) ifTrue: [ 
-			boardLayout at: eachSpotNumber put: (Spot createWith: NoEffect new) ] ].
-	^ boardLayout
+	| layout remainingProbability noEffect |
+	layout := OrderedCollection new.
+	remainingProbability := 100.
+	self assertCorrectProbabilities:
+		aDictionaryWithEffectsAndItsProbabilities.
+	aDictionaryWithEffectsAndItsProbabilities associationsDo: [
+		:association |
+		| effect probability numberOfSpots |
+		effect := association key.
+		probability := association value.
+
+		probability := probability min: remainingProbability.
+
+		numberOfSpots := probability * anAmountOfSpots / 100 rounded.
+
+        numberOfSpots timesRepeat: [
+            | spotEffect |
+            spotEffect := (effect respondsTo: #createWith:)
+                ifTrue: [effect createWith: (self specialCreatorFor: effect)]
+                ifFalse: [effect new].
+
+            layout addLast: (Spot createWith: spotEffect).
+        ].
+
+		remainingProbability := remainingProbability - probability ].
+	noEffect := NoEffect new.
+	remainingProbability timesRepeat: [ layout addLast: (Spot createWith: noEffect) ].
+	layout shuffle.
+
+	^ layout
 ]
 
 { #category : #layoutCreation }
@@ -112,4 +102,17 @@ EffectCreator >> for: anAmountOfSpots with: aDictionaryWithEffectAndItsProbabili
 EffectCreator >> moonwalkNumberCreator [
 
 	^ 10 atRandom
+]
+
+{ #category : #creation }
+EffectCreator >> specialCreatorFor: anEffect [
+    (anEffect class = Moonwalk class )ifTrue: [ 
+		^ (self moonwalkNumberCreator)
+	 ].
+	(anEffect class = Hyperjump class )ifTrue: [ 
+		^ (self arrayOfJumpsCreator)  ]
+	
+	
+
+
 ]

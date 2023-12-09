@@ -11,6 +11,16 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #adding }
+FiniteDealer >> addToDiscardDeck: aCard [
+	discardDeck addLast: aCard.
+]
+
+{ #category : #getters }
+FiniteDealer >> amountOfCardsInDeck [
+	^ deck size.
+]
+
 { #category : #getters }
 FiniteDealer >> amountOfDiscarded [
 	^ discardDeck size.
@@ -32,8 +42,11 @@ FiniteDealer >> assertCardProbabilityIsPositive: aCardProbability [
 FiniteDealer >> assertDeckIsNotEmpty [
 	(deck isEmptyOrNil)ifTrue: [ 
 		(discardDeck isEmptyOrNil)ifTrue:[
-			Error signal: 'Cannot pull a card as the deck is empty']
-		ifFalse: [ deck := discardDeck shuffled ].
+			Error signal: 'Cannot pull a card as both the deck and discard deck is empty']
+		ifFalse: [ 
+			deck := discardDeck shuffled.
+			discardDeck := OrderedCollection new.			 
+						].
 		].
 ]
 
@@ -77,8 +90,8 @@ FiniteDealer >> createDeckOf: anAmountOfCards using: aDictionaryWithCardsAndItsP
             deck addLast: newCard.
         ].
 		deck shuffle.
-		
     ].
+	^ self
 ]
 
 { #category : #creation }

@@ -88,7 +88,9 @@ Zathura >> boostCard: aCard from: aTargetedSpaceship playedBy: aSpaceship with: 
 	(cardsBeingApplied to: aTargetedSpaceship) remove: aCard.
 	aCard boost.
 	(cardsBeingApplied to: aTargetedSpaceship ) add: aCard .
-	lastCardPlayed := aSpeedBostCard .
+	lastCardPlayed := aSpeedBostCard.
+	board addToDiscardDeck: aSpeedBostCard .
+	
 ]
 
 { #category : #cardApplying }
@@ -97,7 +99,9 @@ Zathura >> cancelCard: aCard from: aSpaceship playedBy: anotherSpaceship with: a
 	self assert: aCard isBeingAppliedTo: aSpaceship.
 	(spaceshipHands at: anotherSpaceship) play: aCancelCard.
 	(cardsBeingApplied to: aSpaceship) remove: aCard.
-	lastCardPlayed := aCancelCard
+	lastCardPlayed := aCancelCard.
+	board addToDiscardDeck: aCard.
+	board addToDiscardDeck: aCancelCard.
 ]
 
 { #category : #cardApplying }
@@ -261,6 +265,7 @@ Zathura >> redoLastCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aRed
 	(spaceshipHands at: anotherSpaceship) play: aRedoCard.
 	self assertSpaceshipCanPlayCard: aSpaceship.
 	(spaceshipHands at: anotherSpaceship) addPickedCardToHand: lastCardPlayed.
+	board addToDiscardDeck: aRedoCard.
 	self
 		currentSpaceshipPlaysCard: lastCardPlayed
 		applyTo: anotherSpaceship
@@ -291,10 +296,11 @@ Zathura >> redoRepeatCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aR
 Zathura >> repeatEffectCardPlayedBy: aSpaceship applyTo: anotherSpaceship with: aRepeatCard [
 
 	| cardPicked |
-	(spaceshipHands at: anotherSpaceship) play: aRepeatCard.
+	(spaceshipHands at: aSpaceship) play: aRepeatCard.
 	cardPicked := board applyLastEffectTo: anotherSpaceship.
-	(spaceshipHands at: anotherSpaceship) addPickedCardToHand: cardPicked.
-	lastCardPlayed := aRepeatCard
+	(spaceshipHands at: aSpaceship) addPickedCardToHand: cardPicked.
+	lastCardPlayed := aRepeatCard.
+	board addToDiscardDeck: aRepeatCard.
 ]
 
 { #category : #getters }

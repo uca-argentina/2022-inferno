@@ -20,14 +20,14 @@ EffectCreatorTest >> test01EffectCreatorCreatesACollectionOfSpotsOfGivenSize [
 
 	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator |
 	anEffectCreator := EffectCreator new.
-	amountOfSpots := 10.
+	amountOfSpots := 100.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 20.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: SpeedUp put: 20.
+	aDictionaryWithEffectProbabilities at: Wormhole put: 20.
+	aDictionaryWithEffectProbabilities at: AtomicBomb put: 2.
+	aDictionaryWithEffectProbabilities at: Moonwalk put: 10.
+	aDictionaryWithEffectProbabilities at: Hyperjump  put: 8.
+	aDictionaryWithEffectProbabilities at: CardPicker put: 10.
 
 	boardLayout := anEffectCreator
 		               for: amountOfSpots
@@ -36,95 +36,96 @@ EffectCreatorTest >> test01EffectCreatorCreatesACollectionOfSpotsOfGivenSize [
 ]
 
 { #category : #tests }
-EffectCreatorTest >> test02EffectCreatorCreatesACollectionOfSpotsWithProportionOfEffectsGivenByProbability [
+EffectCreatorTest >> test02EffectCreatorCreatesACollectionOfSpotsFilledWithSpeedUps [
 
-	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator |
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
 	anEffectCreator := EffectCreator new.
-	amountOfSpots := 10.
+	amountOfSpots := 20.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 95.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 1.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 1.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 1.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 1.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 1.
+	aDictionaryWithEffectProbabilities at: SpeedUp put: 100.
 
 	boardLayout := anEffectCreator
 		               for: amountOfSpots
 		               with: aDictionaryWithEffectProbabilities.
-
-		self assert: (
-  ((boardLayout at: 9) effectAtSpot isKindOf: SpeedUp) or:
-  (((boardLayout at: 8) effectAtSpot isKindOf: SpeedUp )or:
-   (((boardLayout at: 7) effectAtSpot isKindOf: SpeedUp) or:
-    ((boardLayout at: 6) effectAtSpot isKindOf: SpeedUp))))
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: SpeedUp ) .
 ]
 
 { #category : #tests }
-EffectCreatorTest >> test03EffectCreatorDoesFailIfSumOfEffectProbabilitiesExceedOneHundredPercent [
+EffectCreatorTest >> test03EffectCreatorCreatesACollectionOfSpotsFilledWithAtomicBombs [
 
-	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator errorMessage error |
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
 	anEffectCreator := EffectCreator new.
-	amountOfSpots := 10.
-	errorMessage := 'Sum of probabilities exceeds 100 percent.'.
-	error := Error.
+	amountOfSpots := 20.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 51.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: AtomicBomb put: 100.
 
-	boardLayout := [ 
-	               anEffectCreator
+	boardLayout := anEffectCreator
 		               for: amountOfSpots
-		               with: aDictionaryWithEffectProbabilities ].
-	self should: boardLayout raise: error withMessage: errorMessage
+		               with: aDictionaryWithEffectProbabilities.
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: AtomicBomb ) .
 ]
 
 { #category : #tests }
-EffectCreatorTest >> test04EffectCreatorDoesFailIfAProbabilityIsNegative [
+EffectCreatorTest >> test04EffectCreatorCreatesACollectionOfSpotsFilledWithCardPickers [
 
-	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator errorMessage error |
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
 	anEffectCreator := EffectCreator new.
-	amountOfSpots := 10.
-	errorMessage := 'Effect probability cannot be zero or lower.'.
-	error := Error.
+	amountOfSpots := 20.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: -5.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: CardPicker  put: 100.
 
-	boardLayout := [ 
-	               anEffectCreator
+	boardLayout := anEffectCreator
 		               for: amountOfSpots
-		               with: aDictionaryWithEffectProbabilities ].
-	self should: boardLayout raise: error withMessage: errorMessage
+		               with: aDictionaryWithEffectProbabilities.
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: CardPicker  ) .
 ]
 
 { #category : #tests }
-EffectCreatorTest >> test05EffectCreatorDoesFailIfAmountOfSpotsIsZeroOrLower [
+EffectCreatorTest >> test05EffectCreatorCreatesACollectionOfSpotsFilledWithWormHoles [
 
-	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator errorMessage error |
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
 	anEffectCreator := EffectCreator new.
-	amountOfSpots := 0.
-	errorMessage := 'Cannot create a layout with size zero or lower.'''.
-	error := Error.
+	amountOfSpots := 20.
 	aDictionaryWithEffectProbabilities := Dictionary new.
-	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: -5.
-	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
-	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
-	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
-	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
-	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aDictionaryWithEffectProbabilities at: Wormhole  put: 100.
 
-	boardLayout := [ 
-	               anEffectCreator
+	boardLayout := anEffectCreator
 		               for: amountOfSpots
-		               with: aDictionaryWithEffectProbabilities ].
-	self should: boardLayout raise: error withMessage: errorMessage
+		               with: aDictionaryWithEffectProbabilities.
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: Wormhole  ) .
+]
+
+{ #category : #tests }
+EffectCreatorTest >> test06EffectCreatorCreatesACollectionOfSpotsFilledWithNoEffectsIfNotGivenElse [
+
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
+	anEffectCreator := EffectCreator new.
+	amountOfSpots := 20.
+	aDictionaryWithEffectProbabilities := Dictionary new.
+
+	boardLayout := anEffectCreator
+		               for: amountOfSpots
+		               with: aDictionaryWithEffectProbabilities.
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: NoEffect  ) .
+]
+
+{ #category : #tests }
+EffectCreatorTest >> test07EffectCreatorCreatesACollectionOfSpotsFilledWithMoonwalk [
+
+	| boardLayout amountOfSpots aDictionaryWithEffectProbabilities anEffectCreator efectoEnSpot |
+	anEffectCreator := EffectCreator new.
+	amountOfSpots := 20.
+	aDictionaryWithEffectProbabilities := Dictionary new.
+	aDictionaryWithEffectProbabilities at: Moonwalk   put: 100.
+
+	boardLayout := anEffectCreator
+		               for: amountOfSpots
+		               with: aDictionaryWithEffectProbabilities.
+	efectoEnSpot:=(boardLayout at: 2) effectAtSpot.
+	self assert: (efectoEnSpot isKindOf: Moonwalk  ) .
 ]

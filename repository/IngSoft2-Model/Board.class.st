@@ -75,6 +75,11 @@ Board >> addEachPositionToRanking: spaceshipArrayOfKeys [
 	^ orderedRanking
 ]
 
+{ #category : #adding }
+Board >> addToDiscardDeck: aCard [
+	cardDealer addToDiscardDeck: aCard.
+]
+
 { #category : #getters }
 Board >> amountOfLaps [
 

@@ -32,6 +32,12 @@ InfiniteDealer class >> ofTypes: aCollectionOfTypes [
  	^self new initializeWith: aCollectionOfTypes 
 ]
 
+{ #category : #adding }
+InfiniteDealer >> addToDiscardDeck: aCard [
+
+	nil
+]
+
 { #category : #dealing }
 InfiniteDealer >> dealInitialCards [
 
