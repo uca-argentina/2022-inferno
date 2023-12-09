@@ -8,6 +8,11 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #asserting }
+CancellationCard class >> assertThatIsACard [
+	^ true
+]
+
 { #category : #comparing }
 CancellationCard >> = aCard [
 

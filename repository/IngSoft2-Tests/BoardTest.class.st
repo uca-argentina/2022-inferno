@@ -23,7 +23,7 @@ BoardTest >> test01ABoardHasAtLeastOneSpot [
 	aCollectionOfSpots := { firstSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
@@ -39,7 +39,7 @@ BoardTest >> test01ABoardHasAtLeastOneSpot [
 BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -68,7 +68,7 @@ BoardTest >> test02ABoardCanMoveASpaceshipToDesiredPosition [
 BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -94,7 +94,7 @@ BoardTest >> test03ABoardCannotMoveASpaceshipToInvalidLap [
 BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot error errorMessage invalidMove aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -120,7 +120,7 @@ BoardTest >> test04ABoardCannotMoveASpaceshipToInvalidPosition [
 BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -144,7 +144,7 @@ BoardTest >> test05ABoardCanReturnItsLenghtInSpots [
 BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -168,7 +168,7 @@ BoardTest >> test06ABoardCanReturnItsLenghtInParsecs [
 BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -192,7 +192,7 @@ BoardTest >> test07ABoardCanReturnItsAmountOfLapsToBePlayed [
 BoardTest >> test08ABoardCanReturnThePositionOfAllTheSpaceships [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.

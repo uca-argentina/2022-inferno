@@ -78,7 +78,7 @@ HandTest >> test04AHandCanReturnACardThatIsPresentInThatDeck [
 HandTest >> test05AnObjectIsNotAddedToHandUnlessItIsACard [
 
 	| aHand exampleCardOne exampleCardTwo cardToAdd aCollectionOfSpots firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot aCollectionOfSpaceships aCardDealer |
-	aCardDealer := Dealer ofTypes: { SpeedCard new. OverloadCard new. }.
+	aCardDealer := InfiniteDealer ofTypes: { SpeedCard new. OverloadCard new. }.
 	exampleCardOne := SpeedCard new.
 	exampleCardTwo := OverloadCard new.
 	aHand := Hand containing: {

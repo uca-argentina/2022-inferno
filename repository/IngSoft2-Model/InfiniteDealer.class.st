@@ -3,7 +3,7 @@ I represent a Dealer
 
 "
 Class {
-	#name : #Dealer,
+	#name : #InfiniteDealer,
 	#superclass : #Object,
 	#instVars : [
 		'typesOfCards'
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #asserting }
-Dealer class >> assertValidTypes: aCollectionOfTypes [ 
+InfiniteDealer class >> assertValidTypes: aCollectionOfTypes [ 
 	aCollectionOfTypes isNotEmpty ifFalse:[ 
 					Error signal:
 			'Cannot create a card dealer with no types of cards ' ].
@@ -27,13 +27,13 @@ Dealer class >> assertValidTypes: aCollectionOfTypes [
 ]
 
 { #category : #initializing }
-Dealer class >> ofTypes: aCollectionOfTypes [ 
+InfiniteDealer class >> ofTypes: aCollectionOfTypes [ 
 	self assertValidTypes: aCollectionOfTypes.
  	^self new initializeWith: aCollectionOfTypes 
 ]
 
 { #category : #dealing }
-Dealer >> dealInitialCards [
+InfiniteDealer >> dealInitialCards [
 
 	| randomcard1 randomcard2 |
 	randomcard1 := self dealOne.
@@ -44,7 +44,7 @@ Dealer >> dealInitialCards [
 ]
 
 { #category : #dealing }
-Dealer >> dealOne [
+InfiniteDealer >> dealOne [
 
 	| randomcard |
 	randomcard := typesOfCards atRandom.
@@ -52,7 +52,7 @@ Dealer >> dealOne [
 ]
 
 { #category : #initialization }
-Dealer >> initializeWith: aCollectionOfTypes [
+InfiniteDealer >> initializeWith: aCollectionOfTypes [
 
 	typesOfCards := aCollectionOfTypes
 ]

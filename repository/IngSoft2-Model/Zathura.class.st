@@ -75,9 +75,16 @@ Zathura >> assertSpaceshipCanPlayCard: aSpaceship [
 		Error signal: 'Cannot play this card when it is not your turn' ]
 ]
 
+{ #category : #asserting }
+Zathura >> assertTheCard: aPermanentCard canBePlayedOnTarget: aSpaceship [ 
+	((aSpaceship = 'General') = (aPermanentCard = AccelerationCard new))ifFalse:[
+		Error signal: 'Cannot play that card on that target!.'].
+]
+
 { #category : #cardApplying }
 Zathura >> boostCard: aCard from: aTargetedSpaceship playedBy: aSpaceship with: aSpeedBostCard [
 	self assert: aCard isBeingAppliedTo: aTargetedSpaceship.
+	self assertTheCard: aCard canBePlayedOnTarget: aTargetedSpaceship .
 	(cardsBeingApplied to: aTargetedSpaceship) remove: aCard.
 	aCard boost.
 	(cardsBeingApplied to: aTargetedSpaceship ) add: aCard .
@@ -117,6 +124,7 @@ Zathura >> currentSpaceshipPlaysCard: aPermanentCard applyTo: aSpaceship playedB
 
 	| cardToApply |
 	self assertSpaceshipCanPlayCard: anotherSpaceship.
+	self assertTheCard: aPermanentCard canBePlayedOnTarget: aSpaceship .
 	cardToApply := (spaceshipHands at: anotherSpaceship) play:
 		               aPermanentCard.
 	(cardsBeingApplied to: aSpaceship) addLast: aPermanentCard.

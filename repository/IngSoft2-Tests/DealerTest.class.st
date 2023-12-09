@@ -20,7 +20,7 @@ DealerTest >> test01ADealerCanBeCreatedWithAtLeastOneTypeOfCard [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. }.
-	cardDealer := Dealer ofTypes: aCollectionOfTypes.
+	cardDealer := InfiniteDealer ofTypes: aCollectionOfTypes.
 	self assert: (cardDealer dealOne) assertThatIsACard .
 ]
 
@@ -29,7 +29,7 @@ DealerTest >> test02ADealerCannotBeCreatedWithAnEmptyArrayOfTypes [
 
 	| aCollectionOfTypes cardDealer error errorMessage |
 	aCollectionOfTypes := { SpeedCard new. }.
-	cardDealer := [Dealer ofTypes: aCollectionOfTypes].
+	cardDealer := [InfiniteDealer ofTypes: aCollectionOfTypes].
 	error := Error.
 	errorMessage := 'Cannot create a card dealer with no types of cards '.
 	self should: cardDealer raise: error withMessage: errorMessage.
@@ -40,7 +40,7 @@ DealerTest >> test03ADealerCannotBeCreatedWithAnArrayThatContainsAnythingButCard
 
 	| aCollectionOfTypes cardDealer error errorMessage |
 	aCollectionOfTypes := { SpeedCard new. Die new. }.
-	cardDealer := [Dealer ofTypes: aCollectionOfTypes].
+	cardDealer := [InfiniteDealer ofTypes: aCollectionOfTypes].
 	error := Error.
 	errorMessage := 'Array contains an object that is not a Card '.
 	self should: cardDealer raise: error withMessage: errorMessage.
@@ -51,8 +51,8 @@ DealerTest >> test04ADealerReturnsARandomCardIfIntializedWithSeveralTypes [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. OverloadCard  new. }.
-	cardDealer := [Dealer ofTypes: aCollectionOfTypes].
-	cardDealer := Dealer ofTypes: aCollectionOfTypes.
+	cardDealer := [InfiniteDealer ofTypes: aCollectionOfTypes].
+	cardDealer := InfiniteDealer ofTypes: aCollectionOfTypes.
 	self assert: (cardDealer dealOne) assertThatIsACard .
 ]
 
@@ -61,7 +61,7 @@ DealerTest >> test05ADealerReturnsTwoCardsIfAskedToDealInitialHand [
 
 	| aCollectionOfTypes cardDealer |
 	aCollectionOfTypes := { SpeedCard new. OverloadCard  new. }.
-	cardDealer := [Dealer ofTypes: aCollectionOfTypes].
-	cardDealer := Dealer ofTypes: aCollectionOfTypes.
+	cardDealer := [InfiniteDealer ofTypes: aCollectionOfTypes].
+	cardDealer := InfiniteDealer ofTypes: aCollectionOfTypes.
 	self assert: (cardDealer dealInitialCards ) cardsOnHand equals: 2.
 ]

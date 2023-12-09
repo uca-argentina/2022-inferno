@@ -34,9 +34,14 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
 	lengthInParsecs := 100.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
-			               OverloadCard new }.
+			               OverloadCard new. 
+								RepeatCard new.
+								RedoCard new.
+								CancellationCard new.
+								SpeedBoostCard new.
+								AccelerationCard new}.
 	aBoard := Board
 		          with: aCollectionOfSpots
 		          and: lengthInParsecs
@@ -69,7 +74,7 @@ ZathuraTest >> test01AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRando
 ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedPosition exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -127,7 +132,7 @@ ZathuraTest >> test02MovementByAnEffectDoesNotTriggerAnotherEffect [
 ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -184,7 +189,7 @@ ZathuraTest >> test03NoEffectDoesNotMovesAnySpaceship [
 ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -241,7 +246,7 @@ ZathuraTest >> test04SpeedUpMovesASpaceshipFourSpotsForward [
 ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceship firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -298,7 +303,7 @@ ZathuraTest >> test05WormHoleMovesASpaceshipFourSpotsBackwards [
 ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceshipA firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipB positionOfSpaceshipC exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -361,7 +366,7 @@ ZathuraTest >> test06AtomicBombMovesAllTheSpacehipsToTheStartOfSameLap [
 ZathuraTest >> test07ZathuraCanReturnFinalRankingsInCorrectOrder [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedRanking chequeoRankings exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands firstExpectedPosition secondExpectedPosition thirdExpectedPosition aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -434,7 +439,7 @@ ZathuraTest >> test07ZathuraCanReturnFinalRankingsInCorrectOrder [
 ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot sixthSpot expectedPosition seventhSpot error errorMessage invalidTurn exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -496,7 +501,7 @@ ZathuraTest >> test08PlayNextTurnDoesNotAllowSpaceshipToPlayWhenNotItsTurn [
 ZathuraTest >> test09MoonwalkMovesEveryOtherSpaceshipAnAmountOfSpotsBackwards [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura positionOfSpaceshipA firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipB positionOfSpaceshipThatTriggeredTheMoonwalk exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -561,7 +566,7 @@ ZathuraTest >> test09MoonwalkMovesEveryOtherSpaceshipAnAmountOfSpotsBackwards [
 ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot fifthSpot positionOfSpaceshipThatJumps arrayOfJumps exampleCardOne exampleCardTwo aHand1 aHand2 aCollectionOfHands aHand3 aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -623,7 +628,7 @@ ZathuraTest >> test10HyperJumpsMakesFirstJumpSeventeenLightyearsForward [
 ZathuraTest >> test11ZathuraDealsTwoCardsToEachSpaceshipToStart [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot spaceshipCards1 spaceshipCards2 aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -668,7 +673,7 @@ ZathuraTest >> test11ZathuraDealsTwoCardsToEachSpaceshipToStart [
 ZathuraTest >> test12AssertASpaceshipAppliesOverloadToAnotherOneAndDecreasesItsRollByTwo [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -719,7 +724,7 @@ ZathuraTest >> test12AssertASpaceshipAppliesOverloadToAnotherOneAndDecreasesItsR
 ZathuraTest >> test13AssertASpaceshipAppliesSpeedToAnotherOneAndIncreasesItsRollByOne [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -772,7 +777,7 @@ ZathuraTest >> test13AssertASpaceshipAppliesSpeedToAnotherOneAndIncreasesItsRoll
 ZathuraTest >> test14AssertASpaceshipAppliesAccelerationAndIncreasesRollByOneForEveryone [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -823,7 +828,7 @@ ZathuraTest >> test14AssertASpaceshipAppliesAccelerationAndIncreasesRollByOneFor
 ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo cardToPlay cardToPlay2 aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -881,7 +886,7 @@ ZathuraTest >> test15AssertASpaceshipCanRemoveAnOverloadCardUsingACancelationCar
 ZathuraTest >> test16AssertASpaceshipUsesRepeatCardAndLastTriggeredEffectIsDoneAgainToItself [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -937,7 +942,7 @@ ZathuraTest >> test16AssertASpaceshipUsesRepeatCardAndLastTriggeredEffectIsDoneA
 ZathuraTest >> test17AssertASpaceshipRedoesSpeedCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -992,7 +997,7 @@ ZathuraTest >> test17AssertASpaceshipRedoesSpeedCardUsingARedoCard [
 ZathuraTest >> test18AssertASpaceshipRedoesAccelerationCardUsingRedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1050,7 +1055,7 @@ ZathuraTest >> test18AssertASpaceshipRedoesAccelerationCardUsingRedoCard [
 ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay cardToPlay2 exampleCardThree exampleCardFour cardToPlay3 cardToPlay4 aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1121,7 +1126,7 @@ ZathuraTest >> test19AssertASpaceshipRedoesCancellationCardUsingRedoCard [
 ZathuraTest >> test20AssertASpaceshipRedoesRepeatCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1180,7 +1185,7 @@ ZathuraTest >> test20AssertASpaceshipRedoesRepeatCardUsingARedoCard [
 ZathuraTest >> test21SpaceshipCanAskWhatCardsItHasInHand [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot spaceshipHand aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1239,7 +1244,7 @@ ZathuraTest >> test22CardPickerDealsARandomCardToTheTriggeringSpaceship [
 		                      fourthdSpot.
 		                      fifthdSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
@@ -1276,7 +1281,7 @@ ZathuraTest >> test22CardPickerDealsARandomCardToTheTriggeringSpaceship [
 ZathuraTest >> test23SpaceshipCannotPlayPermanentCardWhenItIsNotItsTurn [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot error errorMessage invalidCardUse exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands cardToUse aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1341,7 +1346,7 @@ ZathuraTest >> test24SpaceshipCannotUseRedoOfPermanentCardWhenItIsNotItsTurn [
 	aRedoCard := RedoCard new.
 	error := Error.
 	errorMessage := 'Cannot use redo card on a permanent if it is not this spaceships  turn.'.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aCollectionOfSpots := { 
@@ -1409,7 +1414,7 @@ ZathuraTest >> test25SpaceshipCannotUseRedoCardIfNoCardHasBeenPlayedYet [
 		                      fourthSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
@@ -1467,7 +1472,7 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 		                      fourthSpot }.
 	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
 	                           'SC30 StarFighter' }.
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
@@ -1510,7 +1515,7 @@ ZathuraTest >> test26SpaceshipCannotPlayCardIfItDoesNotHasItInHisHand [
 ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1577,7 +1582,7 @@ ZathuraTest >> test27SpaceshipCanCancelAnAccelerationCard [
 ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1644,7 +1649,7 @@ ZathuraTest >> test28SpaceshipCanCancelAnOverloadCardBeingAppliedOnItself [
 ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthSpot exampleCardOne exampleCardTwo aHand1 aHand2 aHand3 aCollectionOfHands expectedHandAfterUsage emptyCollection aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1711,7 +1716,7 @@ ZathuraTest >> test29SpaceshipCanCancelASpeedCardBeingAppliedOnAnotherSpaceship 
 ZathuraTest >> test30AssertASpaceshipRedoesOverloadCardUsingARedoCard [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1766,7 +1771,7 @@ ZathuraTest >> test30AssertASpaceshipRedoesOverloadCardUsingARedoCard [
 ZathuraTest >> test31AssertASpaceshipUsingSpeedBostOnASpeedCardDuplicatesItsEffect [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1822,7 +1827,7 @@ ZathuraTest >> test31AssertASpaceshipUsingSpeedBostOnASpeedCardDuplicatesItsEffe
 ZathuraTest >> test32AssertASpaceshipUsingSpeedBostOnAOverloadDuplicatesItsEffect [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               OverloadCard new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1884,7 +1889,7 @@ ZathuraTest >> test32AssertASpaceshipUsingSpeedBostOnAOverloadDuplicatesItsEffec
 ZathuraTest >> test33AssertASpaceshipUsingSpeedBostOnAccelerationCardDuplicatesItsEffect [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               AccelerationCard new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1941,7 +1946,7 @@ ZathuraTest >> test33AssertASpaceshipUsingSpeedBostOnAccelerationCardDuplicatesI
 { #category : #tests }
 ZathuraTest >> test34AssertThatIsNotPossibleToBoostInstantCards [
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer errorBlock errorMessage error |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               RepeatCard new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -1997,7 +2002,7 @@ ZathuraTest >> test34AssertThatIsNotPossibleToBoostInstantCards [
 ZathuraTest >> test35AssertASpaceshipUsingSpeedBostOnAccelerationCardCanBeDuplicatedTwice [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               AccelerationCard new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -2037,7 +2042,7 @@ ZathuraTest >> test35AssertASpaceshipUsingSpeedBostOnAccelerationCardCanBeDuplic
 		           over: aBoard
 		           dealing: aCollectionOfHands.
 	cardToPlay := AccelerationCard new.
-	zathura play: cardToPlay by: 'Razor Crest' affecting: 'General'.
+	zathura play: cardToPlay by: 'Razor Crest' affecting:'General'.
 	cardToPlay := SpeedBoostCard new.
 	zathura play: cardToPlay 
 	by: 'Razor Crest' 
@@ -2061,7 +2066,7 @@ ZathuraTest >> test35AssertASpaceshipUsingSpeedBostOnAccelerationCardCanBeDuplic
 ZathuraTest >> test36AssertASpaceshipUsingSpeedBostOnSpeedCardCanBeDuplicatedTwice [
 
 	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer |
-	aCardDealer := Dealer ofTypes: { 
+	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard  new.
 			               SpeedBoostCard new }.
 	firstSpot := Spot createWith: NoEffect new.
@@ -2119,4 +2124,276 @@ ZathuraTest >> test36AssertASpaceshipUsingSpeedBostOnSpeedCardCanBeDuplicatedTwi
 	self assert: (zathura positionOf: 'Millenium Falcon') lapNumber equals: 0.
 	self assert: (zathura positionOf: 'Razor Crest') spotNumber equals: 1.
 	self assert: (zathura positionOf: 'Razor Crest') lapNumber equals: 2.
+]
+
+{ #category : #tests }
+ZathuraTest >> test37AssertASpaceshipCannotPlayASpeedCardOnAllShips [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer errorBlock errorMessage error |
+	aCardDealer := InfiniteDealer ofTypes: { 
+			               SpeedCard  new.
+			               SpeedBoostCard new }.
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := SpeedCard new.
+	exampleCardTwo := SpeedBoostCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := SpeedCard new.
+	errorBlock := [ zathura play: cardToPlay by: 'Razor Crest' affecting: 'General' ].
+	errorMessage:= 'Cannot play that card on that target!'.
+	error := Error.
+	self should: errorBlock raise: error withMessage: errorMessage .
+]
+
+{ #category : #tests }
+ZathuraTest >> test38AssertASpaceshipCannotPlayAOverloadCardOnAllShips [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer errorBlock errorMessage error |
+	aCardDealer := InfiniteDealer ofTypes: { 
+			               OverloadCard   new.
+			               SpeedBoostCard new }.
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := OverloadCard new.
+	exampleCardTwo := SpeedBoostCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := OverloadCard new.
+	errorBlock := [ zathura play: cardToPlay by: 'Razor Crest' affecting: 'General' ].
+	errorMessage:= 'Cannot play that card on that target!.'.
+	error := Error.
+	self should: errorBlock raise: error withMessage: errorMessage .
+]
+
+{ #category : #tests }
+ZathuraTest >> test39AssertASpaceshipCannotPlayAnAccelerationCardOnSpecificShip [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aCardDealer errorBlock errorMessage error |
+	aCardDealer := InfiniteDealer ofTypes: { 
+			               AccelerationCard new.
+			               SpeedBoostCard new }.
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := AccelerationCard new.
+	exampleCardTwo := SpeedBoostCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	cardToPlay := AccelerationCard new.
+	errorBlock := [ zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest' ].
+	errorMessage:= 'Cannot play that card on that target!.'.
+	error := Error.
+	self should: errorBlock raise: error withMessage: errorMessage .
+]
+
+{ #category : #tests }
+ZathuraTest >> test40AGameOfZathuraInfernoCanBePlayedByTurnsTilFinishedWithRandomlyGeneratedBoardLayoutDiesAndFiniteDeck [
+
+	| aCollectionOfSpaceships aBoard aCollectionOfSpots anEffectCreator lengthInParsecs aDiceCup aCollectionOfDice zathura aDie1 aDie2 aHand1 aHand2 aHand3 aCollectionOfHands aDictionaryWithEffectProbabilities aCardDealer aDeckCreator aDictionaryWithCardsAndItsProbabilities |
+	anEffectCreator := EffectCreator new.
+	aDictionaryWithEffectProbabilities := Dictionary new.
+	aDictionaryWithEffectProbabilities at: 'SpeedUp' put: 20.
+	aDictionaryWithEffectProbabilities at: 'Wormhole' put: 20.
+	aDictionaryWithEffectProbabilities at: 'AtomicBomb' put: 2.
+	aDictionaryWithEffectProbabilities at: 'Moonwalk' put: 10.
+	aDictionaryWithEffectProbabilities at: 'Hyperjump' put: 8.
+	aDictionaryWithEffectProbabilities at: 'CardPicker' put: 10.
+	aCollectionOfSpots := anEffectCreator
+		                      for: 1000
+		                      with: aDictionaryWithEffectProbabilities.
+
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
+	                           'SC30 StarFighter' }.
+	lengthInParsecs := 100.
+	
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: lengthInParsecs
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := Die with: 7.
+	aDie2 := Die with: 6.
+	aCollectionOfDice := { 
+		                     aDie1.
+		                     aDie2 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	aHand1 := aBoard dealer dealInitialCards.
+	aHand2 := aBoard dealer dealInitialCards.
+	aHand3 := aBoard dealer dealInitialCards.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2.
+		                      aHand3 }.
+
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	[ zathura hasGameFinished ] whileFalse: [ zathura playNextTurn ].
+	self assert: zathura hasGameFinished
+]
+
+{ #category : #tests }
+ZathuraTest >> test41PlayingAnOverloadCardSendsItToTheDiscardDeck [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer|
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: OverloadCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: CancellationCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RedoCard put: 10.
+	aDictionaryWithCardsAndItsProbabilities at: SpeedBoostCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 15.
+	aDictionaryWithCardsAndItsProbabilities at: AccelerationCard put: 15.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 100
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: NoEffect new.
+	secondSpot := Spot createWith: NoEffect new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 3
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := RedoCard new.
+	exampleCardTwo := OverloadCard new.
+	aHand1 := Hand containing: { 
+			          exampleCardOne.
+			          exampleCardTwo }.
+	aHand2 := Hand containing: { 
+			          exampleCardTwo.
+			          exampleCardOne }.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	zathura playNextTurn.
+	zathura playNextTurn.
+	cardToPlay := OverloadCard new.
+	zathura play: cardToPlay by: 'Razor Crest' affecting: 'Razor Crest'.
+	
+	self assert:( (aBoard dealer) amountOfDiscarded )equals: 1
 ]

@@ -10,6 +10,11 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #asserting }
+OverloadCard class >> assertThatIsACard [
+	^ true
+]
+
 { #category : #comparing }
 OverloadCard >> = aCard [
 
