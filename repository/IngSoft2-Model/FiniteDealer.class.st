@@ -42,7 +42,7 @@ FiniteDealer >> assertCardProbabilityIsPositive: aCardProbability [
 FiniteDealer >> assertDeckIsNotEmpty [
 	(deck isEmptyOrNil)ifTrue: [ 
 		(discardDeck isEmptyOrNil)ifTrue:[
-			Error signal: 'Cannot pull a card as both the deck and discard deck is empty']
+			deck addLast: nil.]
 		ifFalse: [ 
 			deck := discardDeck shuffled.
 			discardDeck := OrderedCollection new.			 

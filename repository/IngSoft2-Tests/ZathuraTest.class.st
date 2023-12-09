@@ -2778,3 +2778,55 @@ ZathuraTest >> test47WhenRanOutOfCardsTheDeckRenovatesItselfFromTheDiscardDeck [
 	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 0.
 	
 ]
+
+{ #category : #tests }
+ZathuraTest >> test48WhenRanOutOfCardsTheDeckAndDiscardIsEmptyTooCardPickEffectDoesNotPickAny [
+
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer testHand |
+	aDeckCreator := FiniteDealer new.
+	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
+	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 100.
+	aCardDealer  := aDeckCreator
+		                      createDeckOf: 4
+		                      with: aDictionaryWithCardsAndItsProbabilities.
+	
+	firstSpot := Spot createWith: CardPicker new.
+	secondSpot := Spot createWith: CardPicker new.
+	thirdSpot := Spot createWith: CardPicker new.
+	fourthdSpot := Spot createWith: CardPicker new.
+	fifthdSpot := Spot createWith: CardPicker new.
+	aCollectionOfSpots := { 
+		                      firstSpot.
+		                      secondSpot.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
+	aBoard := Board
+		          with: aCollectionOfSpots
+		          and: 10
+		          playedFor: 5
+		          by: aCollectionOfSpaceships
+		          DealtBy: aCardDealer.
+	aDie1 := LoadedDie with: 1.
+	aCollectionOfDice := { aDie1 }.
+	aDiceCup := DiceCup with: aCollectionOfDice.
+	exampleCardOne := RepeatCard  new.
+	exampleCardTwo := RepeatCard  new.
+	aHand1 := aCardDealer dealInitialCards .
+	aHand2 := aCardDealer dealInitialCards . "el deck se queda sin cartas"
+	self assert: ((aBoard dealer) amountOfCardsInDeck ) equals: 0.
+	"chequeo q en el deck de descarte tampoco hay cartas"
+	self assert:( (aBoard dealer) amountOfDiscarded ) equals: 0.
+	aCollectionOfHands := { 
+		                      aHand1.
+		                      aHand2 }.
+	zathura := Zathura
+		           playWith: aDiceCup
+		           over: aBoard
+		           dealing: aCollectionOfHands.
+	zathura playNextTurn. "Razor Crest pisa el card picked"
+	testHand := zathura handOf: 'Razor Crest'.
+	self assert: testHand cardsOnHand equals: 2.
+	
+]
