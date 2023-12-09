@@ -2782,7 +2782,7 @@ ZathuraTest >> test47WhenRanOutOfCardsTheDeckRenovatesItselfFromTheDiscardDeck [
 { #category : #tests }
 ZathuraTest >> test48WhenRanOutOfCardsTheDeckAndDiscardIsEmptyTooCardPickEffectDoesNotPickAny [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot cardToPlay aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer testHand |
+	| aBoard aCollectionOfSpaceships aCollectionOfSpots aDie1 aCollectionOfDice aDiceCup zathura firstSpot secondSpot thirdSpot fourthdSpot aHand1 aHand2 aCollectionOfHands exampleCardOne exampleCardTwo fifthdSpot aDeckCreator aDictionaryWithCardsAndItsProbabilities aCardDealer testHand |
 	aDeckCreator := FiniteDealer new.
 	aDictionaryWithCardsAndItsProbabilities := Dictionary new.
 	aDictionaryWithCardsAndItsProbabilities at: RepeatCard put: 100.
