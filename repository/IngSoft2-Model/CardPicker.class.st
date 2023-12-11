@@ -11,7 +11,5 @@ Class {
 { #category : #applying }
 CardPicker >> applyTo: aBoard by: aSpaceship [
 
-	| pickedCard |
-	pickedCard := aBoard dealOneCard.
-	^ pickedCard
+	aBoard setCardPickedFlag: true
 ]

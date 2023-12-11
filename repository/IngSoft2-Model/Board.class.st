@@ -11,7 +11,8 @@ Class {
 		'length',
 		'spaceshipsPositions',
 		'lastEffectAplied',
-		'cardDealer'
+		'cardDealer',
+		'cardPicked'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -89,26 +90,16 @@ Board >> amountOfLaps [
 { #category : #effectApplying }
 Board >> applyEffect: aSpaceship [
 
-	^ self applyEffectTriggeredBy: aSpaceship
+	self applyEffectTriggeredBy: aSpaceship
 ]
 
 { #category : #effectApplying }
 Board >> applyEffectTriggeredBy: aSpaceship [
 
-	| spotNumber resultOfEffectApplying |
+	| spotNumber |
 	spotNumber := (self positionOf: aSpaceship) spotNumber.
 	lastEffectAplied := (layout at: spotNumber) effectAtSpot.
-
-	resultOfEffectApplying := lastEffectAplied
-		                          applyTo: self
-		                          by: aSpaceship.
-
-	(resultOfEffectApplying respondsTo: #assertThatIsACard)
-		ifTrue: [ 
-			resultOfEffectApplying assertThatIsACard
-				ifTrue: [ ^ resultOfEffectApplying ]
-				ifFalse: [ ^ self ] ]
-		ifFalse: [ ^ self ]
+	lastEffectAplied applyTo: self by: aSpaceship.
 ]
 
 { #category : #effectApplying }
@@ -117,14 +108,7 @@ Board >> applyLastEffectTo: aSpaceship [
 	| resultOfEffectApplying |
 	resultOfEffectApplying := lastEffectAplied
 		                          applyTo: self
-		                          by: aSpaceship.
-
-	(resultOfEffectApplying respondsTo: #assertThatIsACard)
-		ifTrue: [ 
-			resultOfEffectApplying assertThatIsACard
-				ifTrue: [ ^ resultOfEffectApplying ]
-				ifFalse: [ ^ self ] ]
-		ifFalse: [ ^ self ]
+		                          by: aSpaceship. 
 ]
 
 { #category : #cardDealing }
@@ -208,6 +192,7 @@ Board >> initializeWith: aCollectionOfSpots and: aLengthInParsecs around: anAmou
 	length := aCollectionOfSpots size.
 	amountOfSpaceships := aCollectionOfSpaceships size.
 	lastEffectAplied := NoEffect new.
+	cardPicked := false.
 	spaceshipsPositions := Dictionary new: amountOfSpaceships.
 	cardDealer := aCardDealer.
 	1 to: amountOfSpaceships do: [ :spaceship | 
@@ -265,29 +250,30 @@ Board >> move: aSpaceship back: rollNumber from: positionBeforeRoll [
 { #category : #playing }
 Board >> move: aSpaceship from: positionBeforeRoll to: rollNumber [
 
-	| spotAfterLapping cardPicked spotBeforeRoll lapBeforeRoll |
+	| spotAfterLapping spotBeforeRoll lapBeforeRoll |
 	spotBeforeRoll := positionBeforeRoll spotNumber.
 	lapBeforeRoll := positionBeforeRoll lapNumber.
 	(self isLapFinishedIf: spotBeforeRoll moves: rollNumber)
-		ifTrue: [ 
+		ifTrue: [
 			lapBeforeRoll + 1 >= laps
 				ifTrue: [ self moveToFinishLine: aSpaceship ]
-				ifFalse: [ 
+				ifFalse: [
 					spotAfterLapping := spotBeforeRoll + rollNumber - length.
 					self move: aSpaceship to: lapBeforeRoll + 1 and: spotAfterLapping.
-					cardPicked := self applyEffect: aSpaceship ] ]
-		ifFalse: [ 
+					self applyEffect: aSpaceship ] ]
+		ifFalse: [
 			(self isLapDecreasedIf: spotBeforeRoll moves: rollNumber)
-				ifFalse: [ 
+				ifFalse: [
 					self
 						move: aSpaceship
 						to: lapBeforeRoll
 						and: spotBeforeRoll + rollNumber ]
-				ifTrue: [ 
+				ifTrue: [
 				self move: aSpaceship back: rollNumber from: positionBeforeRoll ].
-			cardPicked := self applyEffect: aSpaceship ].
-
-	^ cardPicked
+			self applyEffect: aSpaceship ].
+	cardPicked ifFalse: [ ^ self ].
+	self setCardPickedFlag: false.
+	^ self dealOneCard
 ]
 
 { #category : #moving }
@@ -355,6 +341,11 @@ Board >> rankingOfSpaceships [
 	spaceshipsArray := self spaceshipPositions keys.
 	self sortSpaceshipsByPosition: spaceshipsArray.
 	^ self addEachPositionToRanking: spaceshipsArray
+]
+
+{ #category : #setter }
+Board >> setCardPickedFlag: aBoolean [ 
+	cardPicked := aBoolean.
 ]
 
 { #category : #getters }

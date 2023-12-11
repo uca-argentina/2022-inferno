@@ -202,28 +202,32 @@ EffectsTest >> test05MoonwalkMovesEveryOtherSpaceshipNSpotsBackwards [
 { #category : #tests }
 EffectsTest >> test06CardPickerSpotReturnsATypeOfCard [
 
-	| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot thirdSpot cardPicked aCardDealer |
+| aBoard aCollectionOfSpaceships aCollectionOfSpots firstSpot secondSpot thirdSpot fourthdSpot fifthdSpot  aCardDealer startingPosition cardPicked |
 	firstSpot := Spot createWith: NoEffect new.
-	secondSpot := Spot createWith: NoEffect new.
-	thirdSpot := Spot createWith: CardPicker new.
+	secondSpot := Spot createWith: CardPicker new.
+	thirdSpot := Spot createWith: NoEffect new.
+	fourthdSpot := Spot createWith: NoEffect new.
+	fifthdSpot := Spot createWith: NoEffect new.
 	aCollectionOfSpots := { 
 		                      firstSpot.
 		                      secondSpot.
-		                      thirdSpot }.
-	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon'.
-	                           'SC30 StarFighter' }.
+		                      thirdSpot.
+		                      fourthdSpot.
+		                      fifthdSpot }.
+	aCollectionOfSpaceships := { 'Razor Crest'. 'Millenium Falcon' }.
 	aCardDealer := InfiniteDealer ofTypes: { 
 			               SpeedCard new.
 			               OverloadCard new }.
 	aBoard := Board
 		          with: aCollectionOfSpots
-		          and: 9
+		          and: 10
 		          playedFor: 3
 		          by: aCollectionOfSpaceships
 		          DealtBy: aCardDealer.
-	aBoard move: 'Razor Crest' to: 0 and: 3.
-	cardPicked := aBoard applyEffectTriggeredBy: 'Razor Crest'.
-	self assert: cardPicked assertThatIsACard
+	startingPosition := Position at: 0 on: 1.
+
+	cardPicked := aBoard move:'Razor crest' from: startingPosition to: 1. "hago que pise el cardpicker" 
+	self assert: cardPicked assertThatIsACard .
 ]
 
 { #category : #tests }
